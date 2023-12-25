@@ -9,8 +9,8 @@
 
 
 .titleimg{
-    background-image: url("../image/bg.jpeg");
-    height: 120vh;
+    background-image: url("../image/mushou3.png");
+    height: 100vh;
     background-repeat: no-repeat;
     background-size: cover;
     background-attachment: fixed;
@@ -44,19 +44,40 @@
     scroll-snap-align: start;
 }
 
+.message{
+    display: flex;
+    flex-direction: column;
+    height: 10vw;
+    width: 40vw;
+    float: left;
+    margin-top: 3vw;
+    margin-left: 30vw;
+    opacity: 1;
+}
+
+.message h1{
+    text-align: center;
+    font-size: 8em;
+    color: white;
+    height: 30px;
+    line-height: 30px;
+}
+
 .pt{
     display: flex;
     flex-direction: column;
-    height: 500px;
-    width: 250px;
+    height: 13vw;
+    width: 40vw;
     float: left;
-    margin: 150px 0px 0px 105px;
-    background: rgba(219, 235, 241,0.8);
+    margin-top: 3vw;
+    margin-left: 30vw;
+    background: #313131;
     box-shadow: 0 0 15px rgb(59, 73, 95);
     border-radius: 15px;
     overflow: hidden;
     scroll-snap-align: start;
     transition: all 0.5s ease 0s;
+    opacity: 1;
 }
 .pt:hover{
     cursor: pointer;
@@ -64,28 +85,28 @@
 }
 
 .imghid{
+    float: left;
     overflow: hidden;
 }
-.part1 .img{
-    background-image: url("../image/homepic1.png");
-}
+
 .part2 .img{
-    background-image: url("../image/homepic2.png");
+    background-image: url("../image/solips.webp");
+    background-size: cover;
 }
 .part3 .img{
-    background-image: url("../image/homepic3.png");
+    background-image: url("../image/homepic3.jpg");
+    background-size: cover;
 }
 .part4 .img{
-    background-image: url("../image/homepic4.png");
+    background-image: url("../image/homepic4.jpg");
+    background-size: cover;
 }
 
 .pt .img{
-    height: 190px;
-    width: 250px;
-    background-size: cover;
-    background-position: 0px -30px;
     transition: all 0.5s ease 0s;
     opacity: 0.8;
+    width: 23vw;
+    height: 310px;
 }
 
 .pt .img:hover{
@@ -94,26 +115,32 @@
 
 .pt .txt{
     height: 310px;
-    width: 200px;
+    width: 1024px;
     overflow: hidden;
-    display: flex;
+    display: block;
     flex-direction: column;
     margin: auto;
-    
 }
 
 .pt .txt h1{
     text-align: center;
     font-size: 3em;
-    color: rgb(28, 44, 68);
+    width: 430px;
+    color: white;
     height: 30px;
     line-height: 30px;
+    float: right;
 }
 
+
 .pt .txt p{
+    width: 400px;
+    align-self: center;
     margin-top: -2px;
+    font-size: x-large;
     word-wrap: break-word;
-    color: rgb(114, 182, 202);
+    float: right;
+    color: white;
 }
 @keyframes load{
     0%{

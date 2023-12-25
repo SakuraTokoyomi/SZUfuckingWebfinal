@@ -2,12 +2,13 @@
 body{
     margin: 0;
     padding: 0;
-    background-image: url("../image/background.png");
+    background-image: url("../image/mushou2.png");
     background-attachment: fixed; 
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
     overflow-x: hidden;
+    opacity: 0.9;
     width: 100vw;
 }
 
@@ -24,7 +25,7 @@ body{
 }
 
 .foot{
-    margin-top: 0px;
+    margin-top: 100px;
     width: 100vw;
     height: 100px;
     float: left;
