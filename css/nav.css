@@ -9,6 +9,13 @@ body{
     src: url('../font/genshen.ttf') format('truetype'),
   }
 
+#mycanvas{
+    position: relative; /* 固定位置 */
+    width: 100vw;
+    height: 100vh;
+    z-index: 2; /* 将canvas置于其他内容之下 */
+}
+
 nav{
     position: fixed;
     display: flex;

@@ -12,7 +12,7 @@
     background-image: url("../image/bg.jpeg");
     height: 120vh;
     background-repeat: no-repeat;
-    background-size: 100vw;
+    background-size: cover;
     background-attachment: fixed;
     width: 100vw;
     transition: 0.5s ease 0s;
@@ -21,11 +21,14 @@
 
 .titleimg .title{
     width: 100vw;
-    padding:20vw 28vw 20vw 28vw;
+    padding-left: 32vw;
+    padding-right: 32vw;
+    margin-top: -30vw;
     font-size: 100px;
     font-family: 'genshen';
     font-weight: bolder;
-    color: rgba(49, 70, 87,0.9);
+    color: #df8dcd;
+    z-index: 2;
 }
 
 .main{
