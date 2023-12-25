@@ -1,0 +1,167 @@
+@charset "utf-8";
+body{
+    margin: 0;
+    padding: 0;
+}
+
+@font-face {
+    font-family: 'genshen';
+    src: url('../font/genshen.ttf') format('truetype'),
+  }
+
+nav{
+    position: fixed;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 100vw;
+    height: 80px;
+    top: 0px;
+    background-color: rgb(123, 161, 197);
+    overflow: hidden;
+    font-size: 20px;
+    font-family: 'genshen';
+    color: rgb(234, 247, 255);
+    opacity: 0.8;
+    z-index: 1000;
+}
+.homenav{
+    animation: load2 1s linear;
+}
+
+nav:hover{
+    opacity: 0.95;
+}
+nav .navtitle{
+    padding-left: 50px;
+    width: 30%;
+    align-items: center;
+}
+
+nav img{
+    float: left;
+    width: auto;
+    height: 100px;
+}
+
+nav .navtitle strong{
+    font-size: 50px;
+    font-weight: bolder;
+    padding-left: 100px;
+}
+
+nav a{
+   display: block;
+   justify-content: center;
+   text-decoration: none;
+   z-index: 1;
+   height: inherit;
+   line-height: 80px;
+   width: 120px;
+   text-align: center;
+   font-weight: bolder;
+   color: rgb(84, 109, 158);
+   transition: 0.5s;
+}
+nav .navanim{
+    position: absolute;
+    height: inherit;
+    z-index: 0;
+    background: rgb(155, 200, 240);
+    border-radius: 5px;
+    left: 0px;
+    transition:  all .5s ease 0s;
+    width: 120px;
+}
+nav .home,a:nth-child(2):hover~.navanim{
+    width: 120px;
+    left: 37.2vw;
+}
+
+nav .about,a:nth-child(3):hover~.navanim{
+    width: 120px;
+    left: 45.4vw;
+}
+
+nav .blog,a:nth-child(4):hover~.navanim{
+    width: 120px;
+    left: 53.6vw;
+}
+
+nav .album,a:nth-child(5):hover~.navanim{
+    width: 120px;
+    left: 61.8vw;
+}
+nav .join,a:nth-child(6):hover~.navanim{
+    width: 120px;
+    left: 70vw;
+}
+nav .none{
+    width: 20%;
+}
+
+.search{
+    padding-top: 1vw;
+}
+
+.container{
+    height: 50px;
+    width: 20vw;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    border-radius: 30px;
+    float: right;
+    /* backdrop-filter: blur(4px); */
+    box-shadow: 0 0 5px 1px gray;
+    z-index: 1;
+}
+
+.search-box{
+    width: 200px;
+    transition: all 0.3s ease-in-out;
+}
+.container:hover .search-box{
+    width: 440px;
+}
+
+.item{
+    margin: auto 20px;
+    font-size: 20px;
+    opacity: 0;
+    transition-delay: 0.3s;
+    transition: all 0.3s ease;
+}
+.container:hover .item{
+    opacity: 1;
+}
+
+.search-btn{
+    width: 100%;
+    border: none;
+    text-align: center;
+    outline: none;
+    background: inherit;
+    font-size: 20px;
+    transition: all 0.5s ease-in-out;
+}
+
+.search-btn::placeholder{
+    color: rgba(255, 255, 255, 0.7);
+    text-shadow: 0 0 10px #f3f3f3;
+}
+.container:hover .search-btn::placeholder{
+    color: rgba(119, 119, 119, 0.9);
+}
+
+
+
+@keyframes load2{
+    0%{
+        top: -80px;
+        opacity: 0;
+    }100%{
+        top: 0px;
+        opacity: 0.8;
+    }
+}
