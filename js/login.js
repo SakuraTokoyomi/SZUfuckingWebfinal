@@ -2,7 +2,12 @@ function $(id) {
     return document.getElementById(id);
 }
 
+function $$(className, location) {
+  return document.getElementsByClassName(className)[location];
+}
+
 function turnToRegisterPage() {
+  document.title = "注册";
     let front = $("cover");
     front.classList.add('turn');
 
@@ -11,6 +16,7 @@ function turnToRegisterPage() {
 }
 
 function turnToLoginPage() {
+  document.title = "登录";
     let front = $("cover");
     front.classList.remove('turn');
 
@@ -80,40 +86,41 @@ function register() {
     return true;
 }
 
-function sendVertificationCode(phoneNumber) {
+function sendVertificationCode(btnnum) {
     // 禁用发送按钮防止重复点击
-    var sendButton = $('sendVer');
+    var phoneNumber;
+    var sendButton = $$('sendVer', btnnum);
     sendButton.disabled = true;
     sendButton.classList.add('disabled')
   
     // 发送验证码请求
-    var xhr = new XMLHttpRequest();
-    xhr.open('POST', '/send-code', true);
-    xhr.setRequestHeader('Content-Type', 'application/json');
-    xhr.onreadystatechange = function() {
-      if (xhr.readyState === XMLHttpRequest.DONE) {
-        if (xhr.status === 200) {
-          // 验证码发送成功
-          var response = JSON.parse(xhr.responseText);
-          // 处理验证码发送成功后的操作
-        } else {
-          // 验证码发送失败
-          var response = JSON.parse(xhr.responseText);
-          // 处理验证码发送失败后的操作
-        }
-      }
-    };
+    // var xhr = new XMLHttpRequest();
+    // xhr.open('POST', '/send-code', true);
+    // xhr.setRequestHeader('Content-Type', 'application/json');
+    // xhr.onreadystatechange = function() {
+    //   if (xhr.readyState === XMLHttpRequest.DONE) {
+    //     if (xhr.status === 200) {
+    //       // 验证码发送成功
+    //       var response = JSON.parse(xhr.responseText);
+    //       // 处理验证码发送成功后的操作
+    //     } else {
+    //       // 验证码发送失败
+    //       var response = JSON.parse(xhr.responseText);
+    //       // 处理验证码发送失败后的操作
+    //     }
+    //   }
+    // };
   
-    var data = JSON.stringify({ phoneNumber: phoneNumber });
-    xhr.send(data);
+    // var data = JSON.stringify({ phoneNumber: phoneNumber });
+    // xhr.send(data);
 
     // 后端操作或调用api向手机号发送验证码
-    startCountdown(5); // 启动倒计时，60 秒
+    startCountdown(60, btnnum); // 启动倒计时，60 秒
   }
   
-  function startCountdown(duration) {
+  function startCountdown(duration, btnnum) {
     var countdownTimer = setInterval(function() {
-      var sendButton = $('sendVer');
+      var sendButton = $$("sendVer", btnnum);
       sendButton.innerHTML = '重新发送(' + duration + ')';
       duration--;
   
@@ -127,6 +134,7 @@ function sendVertificationCode(phoneNumber) {
   }
 
   function forgetPassword(){
+    document.title = "忘记密码";
     let front = $("cover");
     front.classList.add('turn');
 
@@ -135,6 +143,7 @@ function sendVertificationCode(phoneNumber) {
   }
 
   function turnToLoginFromForget(){
+    document.title = "登录";
     let front = $("cover");
     front.classList.remove('turn');
 
@@ -144,4 +153,27 @@ function sendVertificationCode(phoneNumber) {
 
   function updatePassword(){
     alert("密码修改成功！");
+  }
+
+  function fuck(){
+    fetch('your_php_file.php', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded'
+      },
+      // 请求体参数
+    })
+      .then(function(response) {
+        if (response.ok) {
+          return response.text();  // 处理响应数据
+        } else {
+          throw new Error('请求出错');
+        }
+      })
+      .then(function(data) {
+        console.log(data);
+      })
+      .catch(function(error) {
+        console.error(error);
+      });
   }
