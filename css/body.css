@@ -10,7 +10,6 @@ body{
     overflow-x: hidden;
     opacity: 0.9;
     width: 100vw;
-    opacity: 0.8;
 }
 
 ::-webkit-scrollbar{

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,78 +10,85 @@
     <link rel="stylesheet" href="../css/body.css">
     <link rel="stylesheet" href="../css/nav.css">
 </head>
+
 <body>
     <nav class="homenav">
         <div class="navtitle"><img src="../image/maimai2023.png">
             <div class="search">
-            <div class="container">
+                <div class="container">
                     <i class="fa-brands fa-windows item"></i>
                     <div class="search-box">
                         <input type="text" class="search-btn" id="search" placeholder="搜索">
                     </div>
                     <i class="fa-solid fa-magnifying-glass item" onclick="fuck()"></i>
-            </div>
+                </div>
             </div>
         </div>
         <a href="home.html">HOME</a>
         <a href="about.html">ABOUT</a>
         <a href="blog.html">Q&A</a>
         <a href="album.html">SONGS</a>
-        <a href="join.html">LOGIN</a>
+        <a href="login.html">LOGIN</a>
         <div class="navanim home"></div>
         <div class="none"><img src="../image/login.png" class="login"></div>
     </nav>
     <main class="main">
-    <section class="sec">
-        <div class="titleimg">
-            <canvas id="mycanvas"></canvas>
-            <div class="title">
-                &emsp;Welcome to<br>
-                MaiMaiDX 2023
-            </div>
-        </div>
-    </section>
-    <section class="sec">
-        <div class="message">
-            <h1>置顶消息</h1>
-        </div>
-        <a href="blog.html">
-            <div class="part2 pt">
-                <div class="txt">
-                    <div class="imghid"><div class="img"></div></div>
-                    <h1>推荐乐曲排行榜</h1>
-                    <p>&emsp;1.sølips - Rintaro Soma</p>
-                    <p>&emsp;2.躯樹の墓守 - 庭師,Aoi</p>
-                    <p>&emsp;3.Our Wrenally - t+pazolite</p>
-                    <p>&emsp;......</p>
+        <section class="sec">
+            <div class="titleimg">
+                <canvas id="mycanvas"></canvas>
+                <div class="title">
+                    &emsp;Welcome to<br>
+                    MaiMaiDX 2023
                 </div>
             </div>
-        </a>
-        <a href="album.html">
-            <div class="part3 pt">
-                <div class="txt">
-                    <div class="imghid" style="float: right;"><div class="img"></div></div>
-                    <h1>12月更新情报</h1>
-                    <p style="float: left;">&emsp;&emsp;3个新区域！15首新歌！</p>
-                    <p style="float: left;">&emsp;&emsp;联动曲《蜘蛛の糸》上线！10首经典乐曲复活！本次更新时间2023年12月15日</p>
-                    <p>&emsp;......</p>
-                </div>
+        </section>
+        <section class="sec">
+            <div class="message">
+                <h1>置顶消息</h1>
             </div>
-        </a>
-        <a href="join.html">
-            <div class="part4 pt">
-                <div class="txt">
-                    <div class="imghid"><div class="img"></div></div>
-                    <h1>11月更新情报</h1>
-                    <p>&emsp;&emsp;2个新区域！13首新歌！</p>
-                    <p>&emsp;&emsp;中二节奏联动乐曲和完美挑战曲追加！本次更新时间2023年11月2日</p>
-                    <p>&emsp;......</p>
+            <a href="blog.html">
+                <div class="part2 pt">
+                    <div class="txt">
+                        <div class="imghid">
+                            <div class="img"></div>
+                        </div>
+                        <h1>推荐乐曲排行榜</h1>
+                        <p>&emsp;1.sølips - Rintaro Soma</p>
+                        <p>&emsp;2.躯樹の墓守 - 庭師,Aoi</p>
+                        <p>&emsp;3.Our Wrenally - t+pazolite</p>
+                        <p>&emsp;......</p>
+                    </div>
                 </div>
-            </div>
-        </a>
-    </section>
+            </a>
+            <a href="album.html">
+                <div class="part3 pt">
+                    <div class="txt">
+                        <div class="imghid" style="float: right;">
+                            <div class="img"></div>
+                        </div>
+                        <h1>12月更新情报</h1>
+                        <p style="float: left;">&emsp;&emsp;3个新区域！15首新歌！</p>
+                        <p style="float: left;">&emsp;&emsp;联动曲《蜘蛛の糸》上线！10首经典乐曲复活！本次更新时间2023年12月15日</p>
+                        <p>&emsp;......</p>
+                    </div>
+                </div>
+            </a>
+            <a href="join.html">
+                <div class="part4 pt">
+                    <div class="txt">
+                        <div class="imghid">
+                            <div class="img"></div>
+                        </div>
+                        <h1>11月更新情报</h1>
+                        <p>&emsp;&emsp;2个新区域！13首新歌！</p>
+                        <p>&emsp;&emsp;中二节奏联动乐曲和完美挑战曲追加！本次更新时间2023年11月2日</p>
+                        <p>&emsp;......</p>
+                    </div>
+                </div>
+            </a>
+        </section>
         <footer class="foot">
-            <p>@2023-2024  |  BY:Tokoyomi t3uk1 3zures</p>
+            <p>@2023-2024 | BY:Tokoyomi t3uk1 3zures</p>
             <p>网页版权归修罗所有</p>
             <p>i am the bone of my sword</p>
         </footer>
@@ -88,19 +96,19 @@
     <script src="https://kit.fontawesome.com/f23451c27c.js" crossorigin="anonymous"></script>
     <script src="../js/sakura.js"></script>
     <script>
-        function fuck()
-        {
+        function fuck() {
             alert("fuck you")
         }
-    document.getElementById('search').addEventListener('keypress', function(event) {
-    if (event.key === 'Enter') {
-        event.preventDefault(); // 阻止表单默认提交行为
-        var searchTerm = this.value; // 获取输入框的值
-        alert(searchTerm)// 执行搜索操作，例如发送请求或更新页面
-        console.log("搜索词: " + searchTerm); // 示例操作
-    }
-});
+        document.getElementById('search').addEventListener('keypress', function (event) {
+            if (event.key === 'Enter') {
+                event.preventDefault(); // 阻止表单默认提交行为
+                var searchTerm = this.value; // 获取输入框的值
+                alert(searchTerm)// 执行搜索操作，例如发送请求或更新页面
+                console.log("搜索词: " + searchTerm); // 示例操作
+            }
+        });
 
     </script>
 </body>
+
 </html>

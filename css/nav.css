@@ -100,7 +100,7 @@ nav .album,a:nth-child(5):hover~.navanim{
     width: 120px;
     left: 61.8vw;
 }
-nav .join,a:nth-child(6):hover~.navanim{
+nav .login,a:nth-child(6):hover~.navanim{
     width: 120px;
     left: 70vw;
 }

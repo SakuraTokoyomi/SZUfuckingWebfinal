@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../css/nav.css">
+    <link rel="stylesheet" href="../css/loginstyle.css">
+</head>
+
+<body>
+    <nav class="homenav">
+        <div class="navtitle"><img src="../image/maimai2023.png">
+            <div class="search">
+                <div class="container">
+                    <i class="fa-brands fa-windows item"></i>
+                    <div class="search-box">
+                        <input type="text" class="search-btn" id="search" placeholder="搜索">
+                    </div>
+                    <i class="fa-solid fa-magnifying-glass item" onclick="fuck()"></i>
+                </div>
+            </div>
+        </div>
+        <a href="home.html">HOME</a>
+        <a href="about.html">ABOUT</a>
+        <a href="blog.html">Q&A</a>
+        <a href="album.html">SONGS</a>
+        <a href="login.html">LOGIN</a>
+        <div class="navanim login"></div>
+        <div class="none"><img src="../image/login.png" class="login"></div>
+    </nav>
+
+    <div class="cover" id="cover">
+        <h2>Login</h2>
+        <div class="input-box">
+            <label>账号</label>
+            <input type="text" placeholder="手机号/账号"/>
+        </div>
+        <div class="input-box">
+            <label>密码</label>
+            <input type="password" placeholder="请输入密码"/>
+        </div>
+        <div class="btn-box">
+            <div class="settings">
+                <input type="checkbox" name="savepwd" id=savepwd>&nbsp;&nbsp;记住密码
+                <a href="#">忘记密码?</a>
+            </div>
+
+            <div>
+                <button>登录</button>
+                <button onclick="turnToRegisterPage()">注册</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="back" id="back">
+        <h2>Register</h2>
+        <div class="input-box">
+            <label>账号</label>
+            <input type="text" placeholder="手机号"/>
+        </div>
+        <div class="input-box">
+            <label>验证码</label>
+            <input type="text" placeholder="请输入验证码"/>
+        </div>
+        <div class="btn-box">
+            <div>
+                <button onclick="turnToLoginPage()">返回</button>
+                <button onclick="">注册</button>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        function turnToRegisterPage() {
+            let front = document.getElementById("cover");
+            front.classList.add('turn');
+
+            let back = document.getElementById("back");
+            back.classList.add('turn2');
+        }
+
+        function turnToLoginPage() {
+            let front = document.getElementById("cover");
+            front.classList.remove('turn');
+
+            let back = document.getElementById("back");
+            back.classList.remove('turn2');
+        }
+    </script>
+</body>
+
+</html>
