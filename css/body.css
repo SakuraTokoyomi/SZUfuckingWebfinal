@@ -8,6 +8,7 @@ body{
     background-size: cover;
     background-position: center;
     overflow-x: hidden;
+    opacity: 0.9;
     width: 100vw;
     opacity: 0.8;
 }
@@ -25,7 +26,7 @@ body{
 }
 
 .foot{
-    margin-top: 0px;
+    margin-top: 100px;
     width: 100vw;
     height: 100px;
     float: left;
