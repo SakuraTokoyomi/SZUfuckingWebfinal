@@ -19,7 +19,7 @@ body {
     align-items: center;
 }
 
-.cover, .back{
+.cover{
     position: absolute;
     width: 20vw;
     height: 20vw;
@@ -38,19 +38,37 @@ body {
     transition: all 2s ease-in-out;
 }
 
-.back {
+.back,.back2 {
+    position: absolute;
+    width: 20vw;
+    height: 25vw;
+    border-top: 1px solid rgba(255,255,255,0.5);
+    border-left: 1px solid rgba(255,255,255,0.5);
+    border-bottom: 1px solid rgba(255,255,255,0.3);
+    border-right: 1px solid rgba(255,255,255,0.3);
+    backdrop-filter: blur(10px);
+    background: rgba(50,50,50,0.2);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    backface-visibility: hidden;
+    transition: all 2s ease-in-out;
     transform: rotateY(180deg);
 }
 
 .cover > h2, 
-.back > h2 {
+.back > h2,
+.back2 > h2  {
     font-size: 2vw;
     color: rgba(255,255,255,0.9);
     margin-bottom: 30px;
 }
 
 .cover .input-box, 
-.back .input-box {
+.back .input-box,
+.back2 .input-box {
     display: flex;
     flex-direction: column;
     box-sizing: border-box;
@@ -58,14 +76,16 @@ body {
 }
 
 .cover .input-box label,
-.back .input-box label {
+.back .input-box label,
+.back2 .input-box label {
     font-size: 0.8vw;
     color: rgba(255,255,255,0.9);
     margin-bottom: 5px;
 }
 
 .cover .input-box input,
-.back .input-box input {
+.back .input-box input,
+.back2 .input-box input {
     letter-spacing: 1px;
     font-size: 14px;
     box-sizing: border-box;
@@ -81,12 +101,14 @@ body {
 }
 
 .cover .input-box input:focus,
-.back .input-box input:focus {
+.back .input-box input:focus,
+.back2 .input-box input:focus {
     border: 1px solid rgba(255,255,255,0.8);
 }
 
 .cover .btn-box,
-.back .btn-box  {
+.back .btn-box,
+.back2 .btn-box  {
     width: 12vw;
     display: flex;
     flex-direction: column;
@@ -119,7 +141,8 @@ body {
 }
 
 .cover .btn-box > div,
-.back .btn-box > div  {
+.back .btn-box > div,
+.back2 .btn-box > div  {
     margin-top: 10px;
     display: flex;
     justify-content: center;
@@ -127,7 +150,8 @@ body {
 }
 
 .cover .btn-box > div > button,
-.back .btn-box > div > button {
+.back .btn-box > div > button,
+.back2 .btn-box > div > button {
     outline: none;
     margin-top: 10px;
     display: block;
@@ -137,7 +161,8 @@ body {
 }
 
 .cover .btn-box > div > button:nth-of-type(1),
-.back .btn-box > div > button:nth-of-type(1)  {
+.back .btn-box > div > button:nth-of-type(1),
+.back2 .btn-box > div > button:nth-of-type(1)  {
     width: 5.6vw;
     height: 2vw;
     color: rgba(255,255,255,0.9);
@@ -146,7 +171,8 @@ body {
 }
 
 .cover .btn-box > div > button:nth-of-type(2),
-.back .btn-box > div > button:nth-of-type(2) {
+.back .btn-box > div > button:nth-of-type(2),
+.back2 .btn-box > div > button:nth-of-type(2)  {
     width: 5.6vw;
     height: 2vw;
     margin-left: 1vw;
@@ -165,6 +191,17 @@ body {
     background: rgba(251, 128, 71, 0.5);
 }
 
+.back2 .btn-box > div > button:hover{
+    border: 1px solid rgba(251, 128, 71, 0.7);
+    background: rgba(251, 128, 71, 0.5);
+}
+
+/* 输入框内文本 */
+
+input::placeholder{
+    color: rgb(203, 200, 200);
+}
+
 /* 页面翻转 */
 .turn{
     transform: rotateY(180deg);
@@ -172,5 +209,14 @@ body {
 
 .turn2{
     transform: rotateY(0deg);
+}
+
+#sendVer{
+   padding-left: 6vw;
+   font-size: 0.6vw;
+}
+
+.disabled{
+    color: rgb(180, 180, 180);
 }
 

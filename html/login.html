@@ -7,6 +7,7 @@
     <title>Document</title>
     <link rel="stylesheet" href="../css/nav.css">
     <link rel="stylesheet" href="../css/loginstyle.css">
+    <script src="../js/login.js"></script>
 </head>
 
 <body>
@@ -35,20 +36,20 @@
         <h2>Login</h2>
         <div class="input-box">
             <label>账号</label>
-            <input type="text" placeholder="手机号/账号"/>
+            <input type="text" id="account" placeholder="手机号" />
         </div>
         <div class="input-box">
             <label>密码</label>
-            <input type="password" placeholder="请输入密码"/>
+            <input type="password" id="password" placeholder="请输入密码" />
         </div>
         <div class="btn-box">
             <div class="settings">
-                <input type="checkbox" name="savepwd" id=savepwd>&nbsp;&nbsp;记住密码
-                <a href="#">忘记密码?</a>
+                <input type="checkbox" name="savepwd" id="savepwd">&nbsp;&nbsp;记住密码
+                <a href="#" onclick="forgetPassword()">忘记密码?</a>
             </div>
 
             <div>
-                <button>登录</button>
+                <button onclick="login()">登录</button>
                 <button onclick="turnToRegisterPage()">注册</button>
             </div>
         </div>
@@ -58,37 +59,53 @@
         <h2>Register</h2>
         <div class="input-box">
             <label>账号</label>
-            <input type="text" placeholder="手机号"/>
+            <input type="text" id="account-reg" placeholder="手机号" />
         </div>
         <div class="input-box">
-            <label>验证码</label>
-            <input type="text" placeholder="请输入验证码"/>
+            <label>密码</label>
+            <input type="text" id="password-reg" placeholder="请输入密码" />
+        </div>
+        <div class="input-box">
+            <label>重复密码</label>
+            <input type="text" id="repassword-reg" placeholder="请再次输入密码" />
+        </div>
+        <div class="input-box">
+            <label>验证码<span id="sendVer" onclick="sendVertificationCode()">发送验证码</span></label>
+            <input type="text" id="accesscode" placeholder="请输入验证码" />
         </div>
         <div class="btn-box">
             <div>
                 <button onclick="turnToLoginPage()">返回</button>
-                <button onclick="">注册</button>
+                <button onclick="register()">提交</button>
             </div>
         </div>
     </div>
 
-    <script type="text/javascript">
-        function turnToRegisterPage() {
-            let front = document.getElementById("cover");
-            front.classList.add('turn');
-
-            let back = document.getElementById("back");
-            back.classList.add('turn2');
-        }
-
-        function turnToLoginPage() {
-            let front = document.getElementById("cover");
-            front.classList.remove('turn');
-
-            let back = document.getElementById("back");
-            back.classList.remove('turn2');
-        }
-    </script>
+    <div class="back2" id="back2">
+        <h2>Reset Password</h2>
+        <div class="input-box">
+            <label>账号</label>
+            <input type="text" id="account-reg" placeholder="手机号" />
+        </div>
+        <div class="input-box">
+            <label>设置新密码</label>
+            <input type="text" id="password-reg" placeholder="请输入密码" />
+        </div>
+        <div class="input-box">
+            <label>重复密码</label>
+            <input type="text" id="repassword-reg" placeholder="请再次输入密码" />
+        </div>
+        <div class="input-box">
+            <label>验证码<span id="sendVer" onclick="sendVertificationCode()">发送验证码</span></label>
+            <input type="text" id="accesscode" placeholder="请输入验证码" />
+        </div>
+        <div class="btn-box">
+            <div>
+                <button onclick="turnToLoginFromForget()">返回</button>
+                <button onclick="updatePassword()">提交</button>
+            </div>
+        </div>
+    </div>
 </body>
 
 </html>
