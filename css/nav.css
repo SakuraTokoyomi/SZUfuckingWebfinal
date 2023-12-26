@@ -24,7 +24,8 @@ nav{
     width: 100vw;
     height: 80px;
     top: 0px;
-    background-color: rgb(123, 161, 197);
+    /* background-color: rgb(123, 161, 197); */
+    background-color: #df8dcd;
     overflow: hidden;
     font-size: 20px;
     font-family: 'genshen';
@@ -105,6 +106,12 @@ nav .join,a:nth-child(6):hover~.navanim{
 }
 nav .none{
     width: 20%;
+}
+
+nav .none .login{
+    width: 60px;
+    height: 60px;
+    float:left;
 }
 
 .search{
