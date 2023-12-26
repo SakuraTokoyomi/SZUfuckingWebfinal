@@ -216,6 +216,12 @@ input::placeholder{
    font-size: 0.6vw;
 }
 
+#sendVer:hover{
+    padding-left: 6vw;
+    font-size: 0.6vw;
+    color: white;
+ }
+
 .disabled{
     color: rgb(180, 180, 180);
 }

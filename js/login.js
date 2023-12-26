@@ -87,28 +87,28 @@ function sendVertificationCode(phoneNumber) {
     sendButton.classList.add('disabled')
   
     // 发送验证码请求
-    var xhr = new XMLHttpRequest();
-    xhr.open('POST', '/send-code', true);
-    xhr.setRequestHeader('Content-Type', 'application/json');
-    xhr.onreadystatechange = function() {
-      if (xhr.readyState === XMLHttpRequest.DONE) {
-        if (xhr.status === 200) {
-          // 验证码发送成功
-          var response = JSON.parse(xhr.responseText);
-          // 处理验证码发送成功后的操作
-        } else {
-          // 验证码发送失败
-          var response = JSON.parse(xhr.responseText);
-          // 处理验证码发送失败后的操作
-        }
-      }
-    };
+    // var xhr = new XMLHttpRequest();
+    // xhr.open('POST', '/send-code', true);
+    // xhr.setRequestHeader('Content-Type', 'application/json');
+    // xhr.onreadystatechange = function() {
+    //   if (xhr.readyState === XMLHttpRequest.DONE) {
+    //     if (xhr.status === 200) {
+    //       // 验证码发送成功
+    //       var response = JSON.parse(xhr.responseText);
+    //       // 处理验证码发送成功后的操作
+    //     } else {
+    //       // 验证码发送失败
+    //       var response = JSON.parse(xhr.responseText);
+    //       // 处理验证码发送失败后的操作
+    //     }
+    //   }
+    // };
   
-    var data = JSON.stringify({ phoneNumber: phoneNumber });
-    xhr.send(data);
+    // var data = JSON.stringify({ phoneNumber: phoneNumber });
+    // xhr.send(data);
 
     // 后端操作或调用api向手机号发送验证码
-    startCountdown(5); // 启动倒计时，60 秒
+    startCountdown(60); // 启动倒计时，60 秒
   }
   
   function startCountdown(duration) {
