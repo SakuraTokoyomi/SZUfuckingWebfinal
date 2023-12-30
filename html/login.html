@@ -7,6 +7,7 @@
     <title>登录</title>
     <link rel="stylesheet" href="../css/nav.css">
     <link rel="stylesheet" href="../css/loginstyle.css">
+    <script src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.1/dist/js.cookie.min.js"></script>
     <script src="../js/login.js"></script>
     <script src="../js/global.js"></script>
     <script src="https://smtpjs.com/v3/smtp.js"></script>
@@ -47,7 +48,7 @@
         <div class="btn-box">
             <div class="settings">
                 <input type="checkbox" name="savepwd" id="savepwd">&nbsp;&nbsp;记住密码
-                <a href="#" onclick="forgetPassword()">忘记密码?</a>
+                <a href="#" onclick="turnToForgetPassword()">忘记密码?</a>
             </div>
             <!-- <form method="POST" action="mail.php">
                 <button>发送邮件</button>
