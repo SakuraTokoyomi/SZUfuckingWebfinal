@@ -23,14 +23,50 @@
 ```json
 {
     "Success":true,
-    "Data":{
+    "Data":[
+      {
         "QAID":1,
-        "Title":"title",
-        "Content":"Content",  //你看看要不要裁剪
+        "Title":"title1",
+        "Content":"Content1",  //你看看要不要裁剪
         "CreateAt":1697763500,
         "DetailsPage":"QADeltail?QAID=1"
-    }
+      },
+      {
+        "QAID":2,
+        "Title":"title2",
+        "Content":"Content2",  //你看看要不要裁剪
+        "CreateAt":1697763500,
+        "DetailsPage":"QADeltail?QAID=2"
+      },
+    ]
 }
 ```
 
 先这样吧，有就改呗
+
+
+http://3zureus.vm.szu.moe:8080/swagger-ui/index.html
+
+
+你们测试的样例
+
+```python
+import requests
+
+headers = {
+    'accept': '*/*',
+    'Token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJhdXRoMCIsInVzZXJuYW1lIjoiY2JiIiwidXNlcklEIjoxMSwiZXhwIjoxNzA0MDQ0NzgwfQ.TV6aqIMXf9wUFf-Nf4hMIwPBxtycu1Y1TWvXm_USXso',
+    'Content-Type': 'application/json',
+}
+
+json_data = {
+    'username': 'cbb',
+    'oldpassword': '1234567',
+    'newpassword': '123456',
+}
+
+response = requests.post('http://localhost:8080/user/changePassword', headers=headers, json=json_data)
+
+print(response.content)
+
+```
