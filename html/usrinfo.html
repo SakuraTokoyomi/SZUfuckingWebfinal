@@ -1,86 +1,114 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../css/nav.css">
-    <link rel="stylesheet" href="../css/usrinfostyle.css">
-    <script src="../js/global.js"></script>
-    <title>个人主页</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../css/nav.css">
+  <link rel="stylesheet" href="../css/usrinfostyle.css">
+  <script src="../js/global.js"></script>
+  <title>个人主页</title>
 </head>
+
 <body>
-    <nav class="homenav">
-        <div class="navtitle"><img src="../image/maimai2023.png">
-            <div class="search">
-                <div class="container">
-                    <i class="fa-brands fa-windows item"></i>
-                    <div class="search-box">
-                        <input type="text" class="search-btn" id="search" placeholder="搜索">
-                    </div>
-                    <i class="fa-solid fa-magnifying-glass item" onclick="fuck()"></i>
-                </div>
-            </div>
-        </div>
-        <a href="home.html">HOME</a>
-        <a href="about.html">ABOUT</a>
-        <a href="blog.html">Q&A</a>
-        <a href="album.html">SONGS</a>
-        <a href="login.html">LOGIN</a>
-        <div class="navanim login"></div>
-        <div class="none"><img src="../image/login.png" class="login"></div>
-    </nav>
-
-    <div class="leftbox" id="usrcard">
-        <div class="avatar">
-            <img src="../image/login.png" alt="Avatar">
+  <nav class="homenav">
+    <div class="navtitle"><img src="../image/maimai2023.png">
+      <div class="search">
+        <div class="container">
+          <i class="fa-brands fa-windows item"></i>
+          <div class="search-box">
+            <input type="text" class="search-btn" id="search" placeholder="搜索">
           </div>
-        <h2>Login</h2>
-        <div class="sign">
-            <h3>个性签名：</h3>
-            什么时候舞将？ 什么时候舞将？ 什么时候舞将？ 什么时候舞将？ 什么时候舞将？ 什么时候舞将？
+          <i class="fa-solid fa-magnifying-glass item" onclick="fuck()"></i>
         </div>
-        <div class="rewardbox">
-            <div class="reward">
-                <h3>获得姓名板一览：</h3>
-                <img src="../image/namebg/3F.webp">
-              </div>
-              <div class="reward">
-                <img src="../image/namebg/UI_Plate_259103.webp">
-              </div>
-        </div>
+      </div>
     </div>
+    <a href="home.html">HOME</a>
+    <a href="about.html">ABOUT</a>
+    <a href="blog.html">Q&A</a>
+    <a href="album.html">SONGS</a>
+    <a href="login.html">LOGIN</a>
+    <div class="navanim login"></div>
+    <div class="none"><img src="../image/login.png" class="login"></div>
+  </nav>
 
-    <div class="rightbox" id="mainbox">
-        <h2>完善个人信息</h2>
-        <div class="form-container">
-          <div class="form-row">
-            <div class="form-col">
-              <div class="input-box">
-                <label for="account">账号</label>
-                <input type="text" id="account" placeholder="手机号/邮箱" />
-              </div>
-            </div>
-            <div class="form-col">
-              <div class="input-box">
-                <label for="password">密码</label>
-                <input type="password" id="password" placeholder="请输入密码" />
-              </div>
+  <div class="leftbox" id="usrcard">
+    <div class="avatar">
+      <img src="../image/login.png" alt="Avatar">
+    </div>
+    <h2>Login</h2>
+    <div class="sign">
+      <h3>个性签名：</h3>
+      什么时候舞将？ 什么时候舞将？ 什么时候舞将？ 什么时候舞将？ 什么时候舞将？ 什么时候舞将？
+    </div>
+    <div class="rewardbox">
+      <div class="reward">
+        <h3>获得姓名板一览：</h3>
+        <img src="../image/namebg/3F.webp">
+      </div>
+      <div class="reward">
+        <img src="../image/namebg/UI_Plate_259103.webp">
+      </div>
+    </div>
+  </div>
+
+  <div class="rightbox" id="mainbox">
+    <h2>修改个人信息</h2>
+    <div class="form-container" style="padding-top: 10px;border-top: solid 2px #fff;">
+      <div class="form-row">
+        <div class="form-col">
+          <div class="input-box">
+            <label class="currentlabel">当前称昵：李田所</label>
+            <input type="text" id="account" placeholder="填写新的手机号" />
+          </div>
+        </div>
+        <div class="form-col">
+          <div class="input-box">
+            <label class="currentlabel">性别：mtf</label>
+            <input type="text" id="password" placeholder="更改性别" />
+          </div>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-col">
+          <div class="settings">
+            <div class="btn-box">
+              <button onclick="saveName()">保存并提交</button>
             </div>
           </div>
-          <div class="form-row">
-            <div class="form-col">
-              <div class="settings">
-                <input type="checkbox" name="savepwd" id="savepwd">&nbsp;&nbsp;记住密码
-                <a href="#" onclick="forgetPassword()">忘记密码?</a>
-              </div>
-            </div>
-            <div class="form-col">
+        </div>
+        <div class="form-col">
+          <div class="btn-box">
+            <button onclick="saveSex()">保存并提交</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-row" style="padding-top: 10px;margin-top: 2vw;border-top: solid 2px #fff;">
+        <div class="form-col">
+          <label class="currentlabel">更改个性签名：</label>
+          <div class="input-box">
+            <textarea id="changedSign">
+
+            </textarea>
+          </div>
+          <div class="form-col">
+            <div class="input-box" style="margin-left: -1vw;">
               <div class="btn-box">
-                <button onclick="login()">登录</button>
+                <button onclick="saveSign()">保存并提交</button>
               </div>
             </div>
           </div>
         </div>
       </div>
+    </div>
+
+    <div class="photoarea">
+      <h2>个人相册</h2>
+      <div id="photos" style="padding-top: 10px;border-top: solid 2px #fff;">
+
+      </div>
+    </div>
 </body>
+
 </html>
