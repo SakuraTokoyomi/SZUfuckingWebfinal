@@ -6,7 +6,7 @@ body{
 
 @font-face {
     font-family: 'genshen';
-    src: url('../font/genshen.ttf') format('truetype'),
+    src: url('../font/genshen.ttf') format('truetype')
   }
 
 #mycanvas{
