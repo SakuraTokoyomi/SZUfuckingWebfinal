@@ -38,9 +38,8 @@ function login() {
   var isRememberPassword = $("savepwd").checked;
 
   // 输入的密码与正确的密码
-  var inputpwd = "1234";
-  var truepwd = "1234";
-
+  var inputpwd = password.value;
+  var truepwd = getCookie("password");
   // 验证账号
   var accountRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // 手机号正则表达式
   if (!accountRegex.test(account.value)) {
@@ -54,6 +53,7 @@ function login() {
     return;
   }
 
+  // 执行登录操作
   if (freezeTime > 0) {
     alert("登录操作冻结中，还剩" + Math.ceil(freezeTime / 60) + "分钟。");
     return;
@@ -67,18 +67,16 @@ function login() {
     return;
   }
 
-  if (inputpwd !== truepwd) {
+  var encrypted_password = hashPasswordSync(account.value, inputpwd);
+  if (encrypted_password !== truepwd) {
     alert("密码错误！请重新输入！");
     loginErrCount++;
     return;
   }
 
-  // 执行登录操作
   savepwd();
-  setCookie("account", account.value, 7);
-  setCookie("password", password.value, 7);
   alert("登录成功！");
-  window.location.href = "../html/usrinfo.html";
+  // window.location.href = "../html/usrinfo.html";
 }
 
 // 冻结登录操作计数
@@ -125,13 +123,27 @@ function register() {
     return false;
   }
 
+  var encrypted_password = hashPasswordSync(account, password);
   // 执行注册操作
-  // ...
+  setCookie("account", account, 7);
+  setCookie("password", encrypted_password, 7);
 
   // 返回 true 表示验证通过
   alert("提交成功！");
-  alert("请继续完善个人信息！");
-  window.location.href = "../html/usrinfo.html";
+  // alert("请继续完善个人信息！");
+  // window.location.href = "../html/usrinfo.html";
+}
+
+// 密码加盐哈希加密
+function hashPasswordSync(account, password) {
+  //直接使用用户id作为盐值
+  var salt = account;
+  var saltedPassword = password + salt; // 将盐值与密码拼接
+
+  var hash = CryptoJS.SHA256(saltedPassword);
+  var hashedPassword = hash.toString(CryptoJS.enc.Hex);
+  return hashedPassword;
+
 }
 
 function updatePassword() {
@@ -140,7 +152,7 @@ function updatePassword() {
   var confirmPassword = document.getElementById('repassword-reset').value;
   var accessCode = document.getElementById('accesscode-reset').value;
 
-  var accountRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; 
+  var accountRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   if (!accountRegex.test(account)) {
     alert('请输入有效的邮箱作为账号');
     return false;
@@ -164,6 +176,9 @@ function updatePassword() {
     return false;
   }
 
+  var encrypted_password = hashPasswordSync(account, password);
+  setCookie("password", encrypted_password, 7);
+
   alert("密码修改成功！");
   location.reload();
 }
@@ -173,13 +188,38 @@ function sendVertificationCode(btnnum) {
   // 禁用发送按钮防止重复点击
   var phoneNumber;
   var sendButton = $$('sendVer', btnnum);
+  var email;
+  if (btnnum === 0)
+    email = $("account-reg").value;
+  else email = getCookie("account");
   sendButton.disabled = true;
   sendButton.classList.add('disabled')
 
   // 发送验证码请求
+  const data = {
+    Email: email
+  };
+
+  fetch('http://3zureus.vm.szu.moe:8080/user/check/request-check-email', {
+    method: 'POST',
+    headers: {
+      'accept': '*/*',
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(data)
+  })
+    .then(response => response.json())
+    .then(result => {
+      // 处理响应结果
+      console.log(result);
+    })
+    .catch(error => {
+      // 处理错误
+      console.error(error);
+    });
 
   // 后端操作或调用api向邮箱发送验证码
-  startCountdown(60, btnnum); // 启动倒计时，60 秒
+  startCountdown(1, btnnum); // 启动倒计时，60 秒
 }
 
 function startCountdown(duration, btnnum) {
@@ -215,32 +255,6 @@ function turnToLoginFromForget() {
   back.classList.remove('turn2');
 }
 
-// cookie写入与读取
-function setCookie(name, value, days) {
-  var expires = "";
-  if (days) {
-    var date = new Date();
-    date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
-    expires = "; expires=" + date.toUTCString();
-  }
-  document.cookie = name + "=" + encodeURIComponent(value) + expires + "; path=/";
-}
-
-function getCookie(name) {
-  var cookieName = name + "=";
-  var cookieArray = document.cookie.split(';');
-  for (var i = 0; i < cookieArray.length; i++) {
-    var cookie = cookieArray[i];
-    while (cookie.charAt(0) === ' ') {
-      cookie = cookie.substring(1);
-    }
-    if (cookie.indexOf(cookieName) === 0) {
-      return decodeURIComponent(cookie.substring(cookieName.length));
-    }
-  }
-  return null;
-}
-
 // 记住密码与登录状态保存
 function savepwd() {
   if ($("savepwd").checked) {
@@ -255,13 +269,13 @@ function loadLoginInfo() {
   $("account").value = "";
   $("password").value = "";
   // cookie存的是字符串
-  var isSavepwd = Cookies.get('isSavepwd');
+  var isSavepwd = getCookie("isSavepwd");
   console.log(isSavepwd);
   if (isSavepwd === "true") {
-    var account = Cookies.get('account');
-    var password = Cookies.get('password');
+    var account = getCookie('account');
+    // var password = getCookie('password');
     $("account").value = account;
-    $("password").value = password;
+    $("password").value = "111111";
   }
 }
 

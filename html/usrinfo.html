@@ -34,12 +34,13 @@
   </nav>
 
   <div class="leftbox" id="usrcard">
-    <div class="avatar">
-      <img id="userAvatar" src="../image/login.png" alt="Avatar">
+    <div class="avater">
+      <img id="userAvater" src="../image/login.png" alt="avater">
     </div>
     <h2 id="userName">Login</h2>
+    <input type="file" accept="image/*" id="uploadAvater" style="display: none;">
     <div class="btn-box">
-      <button onclick="changeAvatar()">更改头像</button>
+      <button onclick="changeAvater()">更改头像</button>
     </div>
 
     <div class="sign">
@@ -66,7 +67,7 @@
         <div class="form-col">
           <div class="input-box">
             <label class="currentlabel" id="currentName">当前称昵：李田所</label>
-            <input type="text" id="new-userName" placeholder="填写新的手机号" />
+            <input type="text" id="new-userName" placeholder="填写新的称昵" />
           </div>
         </div>
         <div class="form-col">
@@ -95,7 +96,7 @@
         <div class="form-col">
           <label class="currentlabel">更改个性签名：</label>
           <div class="input-box">
-            <textarea id="changedSign">！登录不要直接存cookie，需要修改，在注册的时候更新到cookie</textarea>
+            <textarea id="changedSign"></textarea>
           </div>
           <div class="form-col">
             <div class="input-box" style="margin-left: -1vw;">
