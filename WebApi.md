@@ -68,6 +68,7 @@ json_data = {
 response = requests.post('http://localhost:8080/user/changePassword', headers=headers, json=json_data)
 
 print(response.content)
+print(response.headers)
 
 ```
 
