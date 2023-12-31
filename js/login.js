@@ -204,7 +204,7 @@ function sendVertificationCode(btnnum) {
     method: 'POST',
     headers: {
       'accept': '*/*',
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json',
     },
     body: JSON.stringify(data)
   })
