@@ -3,10 +3,14 @@
 
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self' http://3zureus.vm.szu.moe:8080; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com/ajax/libs/ https://cdn.jsdelivr.net/npm/ https://smtpjs.com/; style-src 'self' 'unsafe-inline'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>登录</title>
     <link rel="stylesheet" href="../css/nav.css">
     <link rel="stylesheet" href="../css/loginstyle.css">
+    <!-- crypto.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/core.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/sha256.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.1/dist/js.cookie.min.js"></script>
     <script src="../js/login.js"></script>
     <script src="../js/global.js"></script>

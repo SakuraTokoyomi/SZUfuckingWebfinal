@@ -2,10 +2,37 @@ function $(id) {
     return document.getElementById(id);
 }
 
-function changeAvatar() {
-    var avatarElement = document.getElementById("userAvatar"); // 使用元素的ID获取头像元素
-    avatarElement.src = url; // 设置头像元素的src属性为用户上传的图片URL
-    alert("头像修改成功！");
+function activeUpload(){
+    var uploadinput = $('uploadAvater')
+    uploadinput.click();
+}
+
+function changeAvater() {
+    // 获取 input 元素
+    var imageInput = document.getElementById("uploadAvater");
+
+    // 添加 change 事件监听器
+    imageInput.addEventListener('change', function() {
+        // 获取用户选择的文件
+        var selectedFile = imageInput.files[0];
+
+        if (selectedFile) {
+            // 使用 FileReader 读取文件，并在加载完成后设置头像的 src 属性
+            var reader = new FileReader();
+            reader.onload = function(event) {
+                // 设置头像元素的 src 属性为文件的临时 URL
+                document.getElementById("userAvater").src = event.target.result;
+            };
+            reader.readAsDataURL(selectedFile);
+            alert("头像修改成功！");
+        } else {
+            // 用户取消选择文件或未选择有效文件的处理
+            alert("未选择有效的图片文件，头像未修改。");
+        }
+    });
+
+    // 模拟点击 input 元素，触发文件选择对话框
+    imageInput.click();
 }
 
 function saveName() {
