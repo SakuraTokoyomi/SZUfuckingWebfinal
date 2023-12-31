@@ -70,3 +70,12 @@ response = requests.post('http://localhost:8080/user/changePassword', headers=he
 print(response.content)
 
 ```
+
+对了，还有测试账号：
+```
+user: user1 , password: pass1
+user: user2 , password: pass2
+user: user3 , password: pass3
+user: user4 , password: pass4
+user: test1 , password: 123456
+```
