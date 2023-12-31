@@ -76,6 +76,7 @@ function login() {
 
   savepwd();
   alert("登录成功！");
+  setCookie("loginState", true, 7);
   // window.location.href = "../html/usrinfo.html";
 }
 
@@ -128,9 +129,12 @@ function register() {
   setCookie("account", account, 7);
   setCookie("password", encrypted_password, 7);
 
+  // 验证码校验
+
   // 返回 true 表示验证通过
   alert("提交成功！");
-  // alert("请继续完善个人信息！");
+  alert("请继续完善个人信息！");
+  setCookie("loginState", true, 7);
   // window.location.href = "../html/usrinfo.html";
 }
 
@@ -200,7 +204,7 @@ function sendVertificationCode(btnnum) {
     Email: email
   };
 
-  fetch('http://3zureus.vm.szu.moe:8080/user/check/request-check-email', {
+  fetch('http://192.168.239.101:8080/user/check/request-check-email', {
     method: 'POST',
     headers: {
       'accept': '*/*',
@@ -217,6 +221,39 @@ function sendVertificationCode(btnnum) {
       // 处理错误
       console.error(error);
     });
+
+  // 创建 XMLHttpRequest 对象
+  // var xhr = new XMLHttpRequest();
+
+  // // 设置请求方法和URL
+  // xhr.open('POST', 'http://192.168.239.101:8080/user/check/request-check-email', true);
+
+  // // 设置请求头
+  // xhr.setRequestHeader('Content-Type', 'application/json');
+  // xhr.setRequestHeader('accept', '*/*');
+
+  // // 处理响应
+  // xhr.onreadystatechange = function () {
+  //   if (xhr.readyState == 4) {
+  //     if (xhr.status == 200) {
+  //       // 请求成功，处理响应结果
+  //       var result = JSON.parse(xhr.responseText);
+  //       console.log(result);
+  //     } else {
+  //       // 请求失败，处理错误
+  //       console.error('Error:', xhr.status, xhr.statusText);
+  //     }
+  //   }
+  // };
+
+  // 创建要发送的数据
+  // var data = {
+  //   Email: email
+  // };
+
+  // 将数据转换为 JSON 字符串并发送请求
+  xhr.send(JSON.stringify(data));
+
 
   // 后端操作或调用api向邮箱发送验证码
   startCountdown(1, btnnum); // 启动倒计时，60 秒
