@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>舞萌DX - Q&A</title>
     <link rel="stylesheet" href="../css/nav.css">
+    <link rel="stylesheet" href="../css/QA.css">
 </head>
 <body>
     <nav class="homenav">
@@ -24,13 +25,127 @@
         <a href="QA.html">Q&A</a>
         <a href="album.html">SONGS</a>
         <a href="login.html">LOGIN</a>
-        <div class="navanim home"></div>
+        <div class="navanim QA"></div>
         <div class="none"><img src="../image/login.png" class="login"></div>
     </nav>
+    <div class="search-container">
+        <input type="text" placeholder="搜索问题..." id="qa-search-box">
+        <button type="submit" id="search-button" onclick="fuck()">搜索</button>
+        <button type="button" id="add-button">+</button>
+    </div>
+    <main>
+        <section class="question">
+            <h2>问题标题</h2>
+            <p>问题描述...</p>
+            <div class="question-info">
+                <span>回复数: 10</span>
+                <span>浏览量: 200</span>
+                <span>最后发表: 2023-12-30</span>
+            </div>
+        </section>
+        <!-- 其他问题 -->
+        <section class="question">
+            <h2>问题标题</h2>
+            <p>问题描述...</p>
+            <div class="question-info">
+                <span>回复数: 10</span>
+                <span>浏览量: 200</span>
+                <span>最后发表: 2023-12-30</span>
+            </div>
+        </section>
+        <section class="question">
+            <h2>问题标题</h2>
+            <p>问题描述...</p>
+            <div class="question-info">
+                <span>回复数: 10</span>
+                <span>浏览量: 200</span>
+                <span>最后发表: 2023-12-30</span>
+            </div>
+        </section>
+        <section class="question">
+            <h2>问题标题</h2>
+            <p>问题描述...</p>
+            <div class="question-info">
+                <span>回复数: 10</span>
+                <span>浏览量: 200</span>
+                <span>最后发表: 2023-12-30</span>
+            </div>
+        </section>
+        <section class="question">
+            <h2>问题标题</h2>
+            <p>问题描述...</p>
+            <div class="question-info">
+                <span>回复数: 10</span>
+                <span>浏览量: 200</span>
+                <span>最后发表: 2023-12-30</span>
+            </div>
+        </section>
+        <section class="question">
+            <h2>问题标题</h2>
+            <p>问题描述...</p>
+            <div class="question-info">
+                <span>回复数: 10</span>
+                <span>浏览量: 200</span>
+                <span>最后发表: 2023-12-30</span>
+            </div>
+        </section>
+        <!-- 其他问题 -->
+        <section class="question">
+            <h2>问题标题</h2>
+            <p>问题描述...</p>
+            <div class="question-info">
+                <span>回复数: 10</span>
+                <span>浏览量: 200</span>
+                <span>最后发表: 2023-12-30</span>
+            </div>
+        </section>
+        <section class="question">
+            <h2>问题标题</h2>
+            <p>问题描述...</p>
+            <div class="question-info">
+                <span>回复数: 10</span>
+                <span>浏览量: 200</span>
+                <span>最后发表: 2023-12-30</span>
+            </div>
+        </section>
+        <section class="question">
+            <h2>问题标题</h2>
+            <p>问题描述...</p>
+            <div class="question-info">
+                <span>回复数: 10</span>
+                <span>浏览量: 200</span>
+                <span>最后发表: 2023-12-30</span>
+            </div>
+        </section>
+        <section class="question">
+            <h2>问题标题</h2>
+            <p>问题描述...</p>
+            <div class="question-info">
+                <span>回复数: 10</span>
+                <span>浏览量: 200</span>
+                <span>最后发表: 2023-12-30</span>
+            </div>
+        </section>
+    </main>
 
-
-
-
-
+    <!-- <footer class="foot">
+        <span class="about">@2023-2024 | BY:Tokoyomi t3uk1 3zures</span><br>
+        <span class="about">网页版权归修罗所有</span><br>
+        <span class="about">i am the bone of my sword</span>
+    </footer> -->
+    <script src="https://kit.fontawesome.com/f23451c27c.js" crossorigin="anonymous"></script>
+    <script>
+        function fuck() {
+            alert("fuck you")
+        }
+        document.getElementById('qa-search-box').addEventListener('keypress', function (event) {
+            if (event.key === 'Enter') {
+                event.preventDefault(); // 阻止表单默认提交行为
+                var searchTerm = this.value; // 获取输入框的值
+                alert(searchTerm)// 执行搜索操作，例如发送请求或更新页面
+                console.log("搜索词: " + searchTerm); // 示例操作
+            }
+        });
+    </script>
 </body>
 </html>
