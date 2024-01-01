@@ -2,14 +2,6 @@
 var loginErrCount = 0;
 var freezeTime;
 
-function $(id) {
-  return document.getElementById(id);
-}
-
-function $$(className, location) {
-  return document.getElementsByClassName(className)[location];
-}
-
 function turnToRegisterPage() {
   document.title = "注册";
   let front = $("cover");

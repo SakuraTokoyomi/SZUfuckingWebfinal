@@ -1,7 +1,17 @@
-function jumpToUserInfo(){
-    window.location.href = "../html/usrinfo.html"
-  }
-  
+var avaterimageURL;
+
+function $(id) {
+  return document.getElementById(id);
+}
+
+function $$(className, location) {
+  return document.getElementsByClassName(className)[location];
+}
+
+function jumpToUserInfo() {
+  window.location.href = "../html/usrinfo.html"
+}
+
 // cookie写入与读取
 function setCookie(name, value, days) {
   var expires = "";
@@ -27,3 +37,12 @@ function getCookie(name) {
   }
   return null;
 }
+
+function loadAvater() {
+  var islogin = getCookie('loginState');
+  if (islogin === "true") {
+    $·("navAvater").src = avaterimageURL;
+
+  }
+}
+document.addEventListener("DOMContentLoaded", loadAvater);
