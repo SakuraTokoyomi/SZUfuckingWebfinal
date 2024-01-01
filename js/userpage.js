@@ -9,7 +9,7 @@ function activeUpload(){
 
 function changeAvater() {
     // 获取 input 元素
-    var imageInput = document.getElementById("uploadAvater");
+    var imageInput = $("uploadAvater");
 
     // 添加 change 事件监听器
     imageInput.addEventListener('change', function() {
@@ -21,7 +21,11 @@ function changeAvater() {
             var reader = new FileReader();
             reader.onload = function(event) {
                 // 设置头像元素的 src 属性为文件的临时 URL
-                document.getElementById("userAvater").src = event.target.result;
+                var imagesrc = event.target.result;
+                // alert(imagesrc);
+                $("userAvater").src = imagesrc;
+                $("navAvater").src = imagesrc;
+                avaterimageURL = imagesrc;
             };
             reader.readAsDataURL(selectedFile);
             alert("头像修改成功！");
