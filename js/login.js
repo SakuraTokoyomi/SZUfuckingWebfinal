@@ -1,6 +1,9 @@
 //错误计数
 var loginErrCount = 0;
 var freezeTime;
+// 创建全局 XMLHttpRequest 对象,在发送请求操作会用到
+var xhr = new XMLHttpRequest();
+// xhr.withCredentials = true;
 
 function turnToRegisterPage() {
   document.title = "注册";
@@ -90,12 +93,17 @@ function register() {
   var password = document.getElementById('password-reg').value;
   var confirmPassword = document.getElementById('repassword-reg').value;
   var accessCode = document.getElementById('accesscode').value;
+  var existAccount = getCookie('account');
 
-  // 验证手机号
+  // 验证账号
   var accountRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // 手机号正则表达式
   if (!accountRegex.test(account)) {
     alert('请输入有效的邮箱作为账号');
     return false;
+  }
+  if(existAccount === account){
+    alert("账号已存在！");
+    return;
   }
 
   // 验证密码
@@ -122,12 +130,16 @@ function register() {
   setCookie("password", encrypted_password, 7);
 
   // 验证码校验
-
+  var accessCode = $('accesscode').value;
+  if (checkAccessCode(accessCode) == false) {
+    alert("验证码错误！");
+    return;
+  }
   // 返回 true 表示验证通过
   alert("提交成功！");
   alert("请继续完善个人信息！");
   setCookie("loginState", true, 7);
-  // window.location.href = "../html/usrinfo.html";
+  window.location.href = "../html/usrinfo.html";
 }
 
 // 密码加盐哈希加密
@@ -172,6 +184,13 @@ function updatePassword() {
     return false;
   }
 
+  // 验证码校验
+  var accessCode = $('accesscode-reset').value;
+  if (checkAccessCode(accessCode) == false) {
+    alert("验证码错误！");
+    return;
+  }
+
   var encrypted_password = hashPasswordSync(account, password);
   setCookie("password", encrypted_password, 7);
 
@@ -181,76 +200,78 @@ function updatePassword() {
 
 // 发送验证码
 function sendVertificationCode(btnnum) {
-  console.log(btnnum);
+  // console.log(btnnum);
   // 禁用发送按钮防止重复点击
   var phoneNumber;
   var sendButton = $$('sendVer', btnnum);
   var email;
-  if (btnnum === 0)
+  var accessCode;
+  if (btnnum === 0) {
     email = $("account-reg").value;
-  else email = getCookie("account");
+    accessCode = $('accesscode').value;
+  }
+  else {
+    email = getCookie("account");
+    accessCode = $('accesscode-reset');
+  }
   sendButton.disabled = true;
   sendButton.classList.add('disabled')
 
   // 发送验证码请求
-  const data = {
-    Email: email
+  // 设置请求方法和URL
+  xhr.open('GET', `http://3zureus.vm.szu.moe:8080/user/check/request-check-email?Email=${email}`, true);
+  // 设置请求头
+  xhr.setRequestHeader('Content-Type', 'application/json');
+  xhr.setRequestHeader('accept', '*/*');
+  // 处理响应
+  xhr.onreadystatechange = function () {
+    if (xhr.readyState == 4) {
+      if (xhr.status == 200) {
+        // 请求成功，处理响应结果
+        var result = JSON.parse(xhr.responseText);
+        console.log(result);
+        alert("验证码发送成功！");
+      } else {
+        // 请求失败，处理错误
+        console.error('Error:', xhr.status, xhr.statusText);
+        alert("验证码发送失败，请重试！");
+      }
+    }
   };
-  console.log(email);
-
-  fetch(`http://localhost:8080/user/check/request-check-email?Email=${email}`, {
-    method: 'GET',
-    headers: {
-      'accept': '*/*',
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(data)
-  })
-    .then(response => response.json())
-    .then(result => {
-      // 处理响应结果
-      console.log(result);
-    })
-    .catch(error => {
-      // 处理错误
-      console.error(error);
-    });
-
-  // 创建 XMLHttpRequest 对象
-  // var xhr = new XMLHttpRequest();
-
-  // // 设置请求方法和URL
-  // xhr.open('POST', 'http://192.168.239.101:8080/user/check/request-check-email', true);
-
-  // // 设置请求头
-  // xhr.setRequestHeader('Content-Type', 'application/json');
-  // xhr.setRequestHeader('accept', '*/*');
-
-  // // 处理响应
-  // xhr.onreadystatechange = function () {
-  //   if (xhr.readyState == 4) {
-  //     if (xhr.status == 200) {
-  //       // 请求成功，处理响应结果
-  //       var result = JSON.parse(xhr.responseText);
-  //       console.log(result);
-  //     } else {
-  //       // 请求失败，处理错误
-  //       console.error('Error:', xhr.status, xhr.statusText);
-  //     }
-  //   }
-  // };
-
-  // 创建要发送的数据
-  // var data = {
-  //   Email: email
-  // };
-
   // 将数据转换为 JSON 字符串并发送请求
-  xhr.send(JSON.stringify(data));
-
-
-  // 后端操作或调用api向邮箱发送验证码
+  xhr.send();
   startCountdown(1, btnnum); // 启动倒计时，60 秒
+}
+
+function checkAccessCode(accessCode) {
+  console.log('accesscode:' + accessCode);
+  var checkSuccess = false;
+  // 创建 XMLHttpRequest 对象
+  // xhr = new XMLHttpRequest();
+  // 设置请求方法和URL
+  xhr.open('GET', `http://3zureus.vm.szu.moe:8080/user/check/request-check-code?Code=${accessCode}`, true);
+  // 设置请求头
+  xhr.setRequestHeader('Content-Type', 'application/json');
+  xhr.setRequestHeader('accept', '*/*');
+  // 处理响应
+  xhr.onreadystatechange = function () {
+    if (xhr.readyState == 4) {
+      if (xhr.status == 200) {
+        // 请求成功，处理响应结果
+        var result = JSON.parse(xhr.responseText);
+        console.log(result);
+        // alert("success");
+        //接收请求与返回是异步的，要调用回调函数返回状态
+        callback(true);
+      } else {
+        // 请求失败，处理错误
+        console.error('Error:', xhr.status, xhr.statusText, xhr.responseText);
+        callback(false); // 调用回调函数，传递失败状态
+      }
+    }
+  };
+  // 将数据转换为 JSON 字符串并发送请求
+  xhr.send();
 }
 
 function startCountdown(duration, btnnum) {
