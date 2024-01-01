@@ -17,9 +17,9 @@
                 <div class="container">
                     <i class="fa-brands fa-windows item"></i>
                     <div class="search-box">
-                        <input type="text" class="search-btn" id="search" placeholder="在Q&A中搜索">
+                        <input type="text" class="search-btn" id="search" placeholder="搜索">
                     </div>
-                    <i class="fa-solid fa-magnifying-glass item" onclick="fuck()"></i>
+                    <i class="fa-solid fa-magnifying-glass item" onclick="search()"></i>
                 </div>
             </div>
         </div>
@@ -32,26 +32,14 @@
     </nav>
     <div class="search-container">
         <input type="text" placeholder="搜索问题..." id="qa-search-box">
-        <button type="submit" id="search-button" onclick="fuck()">搜索</button>
-        <button type="button" id="add-button">+</button>
+        <button type="submit" id="search-button" onclick="search()">在Q&A中搜索</button>
+        <button type="button" id="add-button" ><a href="questionEditor.html" style="text-decoration: none;">+</a></button>
     </div>
     <div id="message-box" style="display: none;">有新问题！</div>
     <main>
     </main>
     <script src="https://kit.fontawesome.com/f23451c27c.js" crossorigin="anonymous"></script>
     <script>
-        function fuck() {
-            alert("fuck you")
-        }
-        document.getElementById('qa-search-box').addEventListener('keypress', function (event) {
-            if (event.key === 'Enter') {
-                event.preventDefault(); // 阻止表单默认提交行为
-                var searchTerm = this.value; // 获取输入框的值
-                alert(searchTerm)// 执行搜索操作，例如发送请求或更新页面
-                console.log("搜索词: " + searchTerm); // 示例操作
-            }
-        });
-
         // 保存当前问题列表到 localStorage
         function saveQuestions(questions) {
             localStorage.setItem('savedQuestions', JSON.stringify(questions.map(q => q.QAID)));
@@ -134,6 +122,26 @@
                     console.error('获取数据失败:', error);
                 });
         });
+    </script>
+    <script src="https://kit.fontawesome.com/f23451c27c.js" crossorigin="anonymous"></script>
+    <script>
+        document.getElementById('search').addEventListener('keypress', function (event) {
+            if (event.key === 'Enter') {
+                event.preventDefault(); // 阻止表单默认提交行为
+                var searchTerm = encodeURIComponent(this.value); // 获取并编码输入框的值
+                window.location.href = 'search.html?Keyword=' + searchTerm; // 跳转到 search.html 并附加搜索词
+            }
+        });
+    </script>
+    <script>
+        document.getElementById('qa-search-box').addEventListener('keypress', function (event) {
+            if (event.key === 'Enter') {
+                event.preventDefault(); // 阻止表单默认提交行为
+                var searchTerm = encodeURIComponent(this.value); // 获取并编码输入框的值
+                window.location.href = 'search.html?Keyword=' + searchTerm; // 跳转到 search.html 并附加搜索词
+            }
+        });
+
     </script>
 </body>
 

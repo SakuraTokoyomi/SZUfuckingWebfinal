@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>舞萌DX - Q&A</title>
+    <link rel="stylesheet" href="../css/nav.css">
+    <link rel="stylesheet" href="../css/QA.css">
+    <script src="../js/global.js"></script>
+</head>
+
+<body>
+    <nav class="homenav">
+        <div class="navtitle"><img src="../image/maimai2023.png">
+            <div class="search">
+                <div class="container">
+                    <i class="fa-brands fa-windows item"></i>
+                    <div class="search-box">
+                        <input type="text" class="search-btn" id="search" placeholder="搜索">
+                    </div>
+                    <i class="fa-solid fa-magnifying-glass item" onclick="search()"></i>
+                </div>
+            </div>
+        </div>
+        <a href="home.html">HOME</a>
+        <a href="about.html">ABOUT</a>
+        <a href="QA.html">Q&A</a>
+        <a href="login.html">LOGIN</a>
+        <div class="navanim QA"></div>
+        <div class="none" onclick="jumpToUserInfo()"><img src="../image/login.png" class="login" id="navAvater"></div>
+    </nav>
+    <div class="search-container">
+        <input type="text" placeholder="搜索问题..." id="qa-search-box">
+        <button type="submit" id="search-button" onclick="search()">在Q&A中搜索</button>
+        <button type="button" id="add-button">+</button>
+    </div>
+    <main>
+    </main>
+    <script src="../js/search.js"></script>
+    <script>
+        // // 保存当前问题列表到 localStorage
+        // function saveQuestions(questions) {
+        //     localStorage.setItem('savedQuestions', JSON.stringify(questions.map(q => q.QAID)));
+        // }
+
+        // // 加载保存的问题列表
+        // function loadSavedQuestions() {
+        //     const saved = localStorage.getItem('savedQuestions');
+        //     return saved ? JSON.parse(saved) : [];
+        // }
+
+        // function isNewQuestion(question, savedQuestions) {
+        //     return !savedQuestions.includes(question.QAID);
+        // }
+
+        // function showMessage() {
+        //     var messageBox = document.getElementById('message-box');
+        //     messageBox.style.display = 'block';
+
+        //     // 3秒后隐藏消息框
+        //     setTimeout(function () {
+        //         messageBox.style.display = 'none';
+        //     }, 3000);
+        // }
+        // document.addEventListener('DOMContentLoaded', function () {
+        //     // 替换这里的 URL 为您的数据源地址
+        //     var dataUrl = 'http://3zureus.vm.szu.moe:8080/webapi/QA/get-qas?From=0';
+        //     var savedQuestions = loadSavedQuestions(); // 加载保存的问题列表
+        //     // 使用 fetch API 获取数据
+        //     fetch(dataUrl)
+        //         .then(response => {
+        //             if (!response.ok) {
+        //                 throw new Error('网络响应错误');
+        //             }
+        //             return response.json();
+        //         })
+        //         .then(responseData => {
+        //             if (responseData.Success) {
+        //                 var questionsContainer = document.querySelector('main');
+        //                 console.log(responseData);
+        //                 responseData.Data.List.forEach(function (question) {
+        //                     var date = new Date(question.CreatedAt * 1000); // 将秒转换为毫秒
+        //                     var formattedDate = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();
+
+        //                     var questionDiv = document.createElement('div');
+        //                     questionDiv.className = 'question';
+        //                     questionDiv.innerHTML = '<h2>' + question.Title + '</h2>'
+        //                         + '<p>' + question.Content + '</p>';
+
+        //                     var likeParagraph = document.createElement('span');
+        //                     likeParagraph.className = 'question-info';
+        //                     likeParagraph.textContent = '浏览量: 0'; // 这里可以替换为动态数据
+
+        //                     var subscribeParagraph = document.createElement('span');
+        //                     subscribeParagraph.className = 'question-info';
+        //                     subscribeParagraph.textContent = '回复数: 0'; // 这里可以替换为动态数据
+
+        //                     var dateParagraph = document.createElement('span');
+        //                     dateParagraph.className = 'question-info';
+        //                     dateParagraph.textContent = '最后发表: ' + formattedDate;
+
+        //                     questionDiv.onclick = function () {
+        //                         window.location.href = question.DetailsPage;
+        //                     };
+
+        //                     questionDiv.appendChild(likeParagraph);
+        //                     questionDiv.appendChild(subscribeParagraph);
+        //                     questionDiv.appendChild(dateParagraph);
+
+        //                     if (isNewQuestion(question, savedQuestions)) {
+        //                         questionDiv.classList.add('new-question');
+        //                         showMessage();
+        //                     }
+        //                     questionsContainer.prepend(questionDiv);
+        //                 });
+        //                 saveQuestions(responseData.Data.List);
+        //             }
+        //         })
+        //         .catch(error => {
+        //             console.error('获取数据失败:', error);
+        //         });
+        // });
+    </script>
+    <script>
+        document.getElementById('search').addEventListener('keypress', function (event) {
+            if (event.key === 'Enter') {
+                event.preventDefault(); // 阻止表单默认提交行为
+                var searchTerm = encodeURIComponent(this.value); // 获取并编码输入框的值
+                window.location.href = 'search.html?Keyword=' + searchTerm; // 跳转到 search.html 并附加搜索词
+            }
+        });
+    </script>
+    <script>
+    // 在 search.html 页面的 JavaScript
+    document.addEventListener('DOMContentLoaded', function () {
+        // 从 URL 中提取搜索词
+        var urlParams = new URLSearchParams(window.location.search);
+        var searchTerm = urlParams.get('Keyword');
+    
+        if (searchTerm) {
+            var searchUrl = 'http://3zureus.vm.szu.moe:8080/webapi/QA/search-question?Keyword=' + searchTerm + '&From=0';
+    
+            // 发送搜索请求
+            fetch(searchUrl)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('网络响应错误');
+                    }
+                    return response.json();
+                })
+                .then(responseData => {
+                    if (responseData.Success) {
+                        var questionsContainer = document.querySelector('main');
+                        console.log(responseData);
+                        responseData.Data.List.forEach(function (question) {
+                            var date = new Date(question.CreatedAt * 1000); // 将秒转换为毫秒
+                            var formattedDate = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();
+                            var questionDiv = document.createElement('div');
+                            questionDiv.className = 'question';
+                            questionDiv.innerHTML = '<h2>' + question.Title + '</h2>'
+                                + '<p>' + question.Content + '</p>';
+
+                            var likeParagraph = document.createElement('span');
+                            likeParagraph.className = 'question-info';
+                            likeParagraph.textContent = '浏览量: 0'; // 这里可以替换为动态数据
+
+                            var subscribeParagraph = document.createElement('span');
+                            subscribeParagraph.className = 'question-info';
+                            subscribeParagraph.textContent = '回复数: 0'; // 这里可以替换为动态数据
+
+                            var dateParagraph = document.createElement('span');
+                            dateParagraph.className = 'question-info';
+                            dateParagraph.textContent = '最后发表: ' + formattedDate;
+
+                            questionDiv.onclick = function () {
+                                window.location.href = question.DetailsPage;
+                            };
+
+                            questionDiv.appendChild(likeParagraph);
+                            questionDiv.appendChild(subscribeParagraph);
+                            questionDiv.appendChild(dateParagraph);
+
+                            questionsContainer.prepend(questionDiv);
+                        });
+                    }
+                })
+                .catch(error => {
+                    console.error('获取数据失败:', error);
+                });
+        }
+    });
+</script>
+    <script src="https://kit.fontawesome.com/f23451c27c.js" crossorigin="anonymous"></script>
+</body>
+
+</html>

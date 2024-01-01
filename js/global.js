@@ -48,4 +48,10 @@ function loadAvater() {
     $('userAvater').src = avaterimageURL;
   }
 }
-document.addEventListener("DOMContentLoaded", loadAvater);
+
+function search()
+{
+  var word= document.getElementById('search');
+  var searchTerm = encodeURIComponent(word.value); // 获取并编码输入框的值
+  window.location.href = 'search.html?Keyword=' + searchTerm; // 跳转到 search.html 并附加搜索词
+}
