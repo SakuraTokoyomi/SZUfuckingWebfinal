@@ -83,27 +83,24 @@ nav .navanim{
 }
 nav .home,a:nth-child(2):hover~.navanim{
     width: 120px;
-    left: 37.2vw;
+    left: 39.2vw;
 }
 
 nav .about,a:nth-child(3):hover~.navanim{
     width: 120px;
-    left: 45.4vw;
+    left: 48.7vw;
 }
 
 nav .QA,a:nth-child(4):hover~.navanim{
     width: 120px;
-    left: 53.6vw;
+    left: 58.5vw;
 }
 
-nav .Songs,a:nth-child(5):hover~.navanim{
+nav .login,a:nth-child(5):hover~.navanim{
     width: 120px;
-    left: 61.8vw;
+    left: 67.9vw;
 }
-nav .login,a:nth-child(6):hover~.navanim{
-    width: 120px;
-    left: 70vw;
-}
+
 nav .none{
     width: 20%;
 }

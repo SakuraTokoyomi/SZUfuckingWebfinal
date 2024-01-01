@@ -17,7 +17,7 @@
                 <div class="container">
                     <i class="fa-brands fa-windows item"></i>
                     <div class="search-box">
-                        <input type="text" class="search-btn" id="search" placeholder="搜索">
+                        <input type="text" class="search-btn" id="search" placeholder="在Q&A中搜索">
                     </div>
                     <i class="fa-solid fa-magnifying-glass item" onclick="fuck()"></i>
                 </div>
@@ -26,7 +26,6 @@
         <a href="home.html">HOME</a>
         <a href="about.html">ABOUT</a>
         <a href="QA.html">Q&A</a>
-        <a href="songs.html">SONGS</a>
         <a href="login.html">LOGIN</a>
         <div class="navanim QA"></div>
         <div class="none" onclick="jumpToUserInfo()"><img src="../image/login.png" class="login" id="navAvater"></div>
@@ -36,110 +35,11 @@
         <button type="submit" id="search-button" onclick="fuck()">搜索</button>
         <button type="button" id="add-button">+</button>
     </div>
+    <div id="message-box" style="display: none;">有新问题！</div>
     <main>
-        <section class="question">
-            <h2>问题标题</h2>
-            <p>问题描述...</p>
-            <div class="question-info">
-                <span>回复数: 10</span>
-                <span>浏览量: 200</span>
-                <span>最后发表: 2023-12-30</span>
-            </div>
-        </section>
-        <!-- 其他问题 -->
-        <section class="question">
-            <h2>问题标题</h2>
-            <p>问题描述...</p>
-            <div class="question-info">
-                <span>回复数: 10</span>
-                <span>浏览量: 200</span>
-                <span>最后发表: 2023-12-30</span>
-            </div>
-        </section>
-        <section class="question">
-            <h2>问题标题</h2>
-            <p>问题描述...</p>
-            <div class="question-info">
-                <span>回复数: 10</span>
-                <span>浏览量: 200</span>
-                <span>最后发表: 2023-12-30</span>
-            </div>
-        </section>
-        <section class="question">
-            <h2>问题标题</h2>
-            <p>问题描述...</p>
-            <div class="question-info">
-                <span>回复数: 10</span>
-                <span>浏览量: 200</span>
-                <span>最后发表: 2023-12-30</span>
-            </div>
-        </section>
-        <section class="question">
-            <h2>问题标题</h2>
-            <p>问题描述...</p>
-            <div class="question-info">
-                <span>回复数: 10</span>
-                <span>浏览量: 200</span>
-                <span>最后发表: 2023-12-30</span>
-            </div>
-        </section>
-        <section class="question">
-            <h2>问题标题</h2>
-            <p>问题描述...</p>
-            <div class="question-info">
-                <span>回复数: 10</span>
-                <span>浏览量: 200</span>
-                <span>最后发表: 2023-12-30</span>
-            </div>
-        </section>
-        <!-- 其他问题 -->
-        <section class="question">
-            <h2>问题标题</h2>
-            <p>问题描述...</p>
-            <div class="question-info">
-                <span>回复数: 10</span>
-                <span>浏览量: 200</span>
-                <span>最后发表: 2023-12-30</span>
-            </div>
-        </section>
-        <section class="question">
-            <h2>问题标题</h2>
-            <p>问题描述...</p>
-            <div class="question-info">
-                <span>回复数: 10</span>
-                <span>浏览量: 200</span>
-                <span>最后发表: 2023-12-30</span>
-            </div>
-        </section>
-        <section class="question">
-            <h2>问题标题</h2>
-            <p>问题描述...</p>
-            <div class="question-info">
-                <span>回复数: 10</span>
-                <span>浏览量: 200</span>
-                <span>最后发表: 2023-12-30</span>
-            </div>
-        </section>
-        <section class="question">
-            <h2>问题标题</h2>
-            <p>问题描述...</p>
-            <div class="question-info">
-                <span>回复数: 10</span>
-                <span>浏览量: 200</span>
-                <span>最后发表: 2023-12-30</span>
-            </div>
-        </section>
-
     </main>
-
-    <!-- <footer class="foot">
-        <span class="about">@2023-2024 | BY:Tokoyomi t3uk1 3zures</span><br>
-        <span class="about">网页版权归修罗所有</span><br>
-        <span class="about">i am the bone of my sword</span>
-    </footer> -->
     <script src="https://kit.fontawesome.com/f23451c27c.js" crossorigin="anonymous"></script>
     <script>
-        var count=0;
         function fuck() {
             alert("fuck you")
         }
@@ -152,10 +52,34 @@
             }
         });
 
+        // 保存当前问题列表到 localStorage
+        function saveQuestions(questions) {
+            localStorage.setItem('savedQuestions', JSON.stringify(questions.map(q => q.QAID)));
+        }
+
+        // 加载保存的问题列表
+        function loadSavedQuestions() {
+            const saved = localStorage.getItem('savedQuestions');
+            return saved ? JSON.parse(saved) : [];
+        }
+
+        function isNewQuestion(question, savedQuestions) {
+            return !savedQuestions.includes(question.QAID);
+        }
+
+        function showMessage() {
+            var messageBox = document.getElementById('message-box');
+            messageBox.style.display = 'block';
+
+            // 3秒后隐藏消息框
+            setTimeout(function () {
+                messageBox.style.display = 'none';
+            }, 3000);
+        }
         document.addEventListener('DOMContentLoaded', function () {
             // 替换这里的 URL 为您的数据源地址
             var dataUrl = 'http://3zureus.vm.szu.moe:8080/webapi/QA/get-qas?From=0';
-            
+            var savedQuestions = loadSavedQuestions(); // 加载保存的问题列表
             // 使用 fetch API 获取数据
             fetch(dataUrl)
                 .then(response => {
@@ -173,11 +97,6 @@
                             var formattedDate = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();
 
                             var questionDiv = document.createElement('div');
-                            if(question.total<count)
-                            {
-                                questionDiv.id = 'new-question';
-                                count+=1;
-                            }
                             questionDiv.className = 'question';
                             questionDiv.innerHTML = '<h2>' + question.Title + '</h2>'
                                 + '<p>' + question.Content + '</p>';
@@ -201,15 +120,20 @@
                             questionDiv.appendChild(likeParagraph);
                             questionDiv.appendChild(subscribeParagraph);
                             questionDiv.appendChild(dateParagraph);
-                            questionsContainer.appendChild(questionDiv);
+
+                            if (isNewQuestion(question, savedQuestions)) {
+                                questionDiv.classList.add('new-question');
+                                showMessage();
+                            }
+                            questionsContainer.prepend(questionDiv);
                         });
+                        saveQuestions(responseData.Data.List);
                     }
                 })
                 .catch(error => {
                     console.error('获取数据失败:', error);
                 });
         });
-
     </script>
 </body>
 
