@@ -36,6 +36,11 @@ function getCookie(name) {
   return null;
 }
 
+function deleteCookie(cookieName) {
+  document.cookie = `${cookieName}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
+}
+
+
 function loadAvater() {
   var islogin = getCookie('loginState');
   var account = getCookie('account');
@@ -48,10 +53,47 @@ function loadAvater() {
     $('userAvater').src = avaterimageURL;
   }
 }
+document.addEventListener("DOMContentLoaded", loadAvater);
 
-function search()
-{
-  var word= document.getElementById('search');
-  var searchTerm = encodeURIComponent(word.value); // 获取并编码输入框的值
-  window.location.href = 'search.html?Keyword=' + searchTerm; // 跳转到 search.html 并附加搜索词
+// 向服务端发送POST请求
+function postData(url, data, callback) {
+  xhr.open("POST", url, true);
+  xhr.responseType = 'json';
+  xhr.setRequestHeader("Content-Type", "application/json");
+  xhr.onreadystatechange = function() {
+      if (xhr.readyState === 4) {
+          if (xhr.status === 200) {
+              // 如果状态码为 200 表示请求成功
+              let jsonResponse = xhr.response;
+              console.log(jsonResponse);
+          }
+          else if (xhr.status === 400){
+              alert(xhr.response);
+          }
+          else {
+              // 如果状态码不为 200，请求可能失败或者出现错误
+              console.error('Request failed with status:', xhr.status);
+              console.log(xhr.response);
+          }
+          // console.log("onreadystatechange 1st if triggered!");
+      }
+  }
+  xhr.send(JSON.stringify(data));
+}
+
+function stringToDecimal(str) {
+  // 将字符串转换为十六进制
+  let hexString = '';
+  for (let i = 0; i < str.length; i++) {
+    hexString += str.charCodeAt(i).toString(16);
+  }
+  
+  // 将十六进制串转换为十进制数字
+  const decimalNumber = parseInt(hexString, 16) % 100;
+  
+  return decimalNumber;
+}
+
+function delay(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
 }

@@ -34,7 +34,7 @@ function login() {
 
   // 输入的密码与正确的密码
   var inputpwd = password.value;
-  var truepwd = getCookie("password");
+  var truepwd = localStorage.getItem(account.value + '-password');
   // 验证账号
   var accountRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // 手机号正则表达式
   if (!accountRegex.test(account.value)) {
@@ -72,6 +72,8 @@ function login() {
   savepwd();
   alert("登录成功！");
   setCookie("loginState", true, 7);
+  setCookie('account', account.value);
+  setCookie('password', encrypted_password);
   // window.location.href = "../html/usrinfo.html";
 }
 
@@ -94,6 +96,8 @@ function register() {
   var confirmPassword = document.getElementById('repassword-reg').value;
   var accessCode = document.getElementById('accesscode').value;
   var existAccount = getCookie('account');
+  // 纯数字唯一标识
+  var userid = '2024' + stringToDecimal(account);
 
   // 验证账号
   var accountRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // 手机号正则表达式
@@ -101,7 +105,7 @@ function register() {
     alert('请输入有效的邮箱作为账号');
     return false;
   }
-  if(existAccount === account){
+  if (existAccount === account) {
     alert("账号已存在！");
     return;
   }
@@ -128,6 +132,22 @@ function register() {
   // 执行注册操作
   setCookie("account", account, 7);
   setCookie("password", encrypted_password, 7);
+  setCookie('userid', userid, 7);
+
+  var registerURL = "http://3zureus.vm.szu.moe:8080/user/register";
+  var registerData = {
+    'Username' : account,
+    'Password' : encrypted_password,
+    'Email' : account
+  }
+  postData(registerURL, registerData, function(err, response) {
+    if (err) {
+        console.error('Error:', xhr.status, xhr.statusText);
+    } else {
+      console.log('成功响应：', response);
+      // 处理响应数据
+    }
+  });
 
   // 验证码校验
   var accessCode = $('accesscode').value;
@@ -135,11 +155,15 @@ function register() {
     alert("验证码错误！");
     return;
   }
+
+  localStorage.setItem('account-' + userid, account);
+  localStorage.setItem(account + '-password', encrypted_password);
+
   // 返回 true 表示验证通过
   alert("提交成功！");
   alert("请继续完善个人信息！");
   setCookie("loginState", true, 7);
-  window.location.href = "../html/usrinfo.html";
+  // window.location.href = "../html/usrinfo.html";
 }
 
 // 密码加盐哈希加密
@@ -193,6 +217,7 @@ function updatePassword() {
 
   var encrypted_password = hashPasswordSync(account, password);
   setCookie("password", encrypted_password, 7);
+  localStorage.setItem(account + '-password', encrypted_password);
 
   alert("密码修改成功！");
   location.reload();
@@ -201,7 +226,6 @@ function updatePassword() {
 // 发送验证码
 function sendVertificationCode(btnnum) {
   // console.log(btnnum);
-  // 禁用发送按钮防止重复点击
   var phoneNumber;
   var sendButton = $$('sendVer', btnnum);
   var email;
@@ -214,6 +238,7 @@ function sendVertificationCode(btnnum) {
     email = getCookie("account");
     accessCode = $('accesscode-reset');
   }
+  // 禁用发送按钮防止重复点击
   sendButton.disabled = true;
   sendButton.classList.add('disabled')
 
@@ -262,11 +287,11 @@ function checkAccessCode(accessCode) {
         console.log(result);
         // alert("success");
         //接收请求与返回是异步的，要调用回调函数返回状态
-        callback(true);
+        return true;
       } else {
         // 请求失败，处理错误
         console.error('Error:', xhr.status, xhr.statusText, xhr.responseText);
-        callback(false); // 调用回调函数，传递失败状态
+        return false;
       }
     }
   };
