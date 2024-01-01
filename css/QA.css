@@ -86,14 +86,26 @@ background-color: #555;
     }
 }
 
-#new-question {
+.new-question {
 
-    animation: fadeIn 2s;
+    animation: fadeIn 3s;
 }
 
-#new-question:hover{
+.new-question:hover{
     background-color: #f9f9f9; /* 鼠标悬停时的背景颜色 */
     border-left: 4px solid red; /* 添加一个左边框作为高亮效果 */
     cursor: pointer; /* 改变鼠标指针样式 */
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* 增加阴影以提升立体感 */
+}
+
+#message-box {
+    position: fixed;
+    top: 100px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: lightblue;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
 }
