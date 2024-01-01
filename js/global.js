@@ -1,5 +1,3 @@
-var avaterimageURL;
-
 function $(id) {
   return document.getElementById(id);
 }
@@ -40,9 +38,14 @@ function getCookie(name) {
 
 function loadAvater() {
   var islogin = getCookie('loginState');
+  var account = getCookie('account');
+  var avaterExtention = getCookie('avaterExtention');
   if (islogin === "true") {
-    $·("navAvater").src = avaterimageURL;
-
+    var avaterimageURL = 'http://3zureus.vm.szu.moe:8080/image/user/' + account + '_avaterImage.' + avaterExtention;
+    console.log('current avater: ' + avaterimageURL);
+    $("navAvater").src = avaterimageURL;
+    // userinfo page
+    $('userAvater').src = avaterimageURL;
   }
 }
 document.addEventListener("DOMContentLoaded", loadAvater);

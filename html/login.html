@@ -8,6 +8,7 @@
     <title>登录</title>
     <link rel="stylesheet" href="../css/nav.css">
     <link rel="stylesheet" href="../css/loginstyle.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.1/dist/js.cookie.min.js"></script>
     <script src="../js/login.js"></script>
     <script src="../js/global.js"></script>
@@ -33,7 +34,7 @@
         <a href="album.html">SONGS</a>
         <a href="login.html">LOGIN</a>
         <div class="navanim login"></div>
-        <div class="none" onclick="jumpToUserInfo()"><img src="../image/login.png" class="login"></div>
+        <div class="none" onclick="jumpToUserInfo()"><img src="../image/login.png" class="login" id="navAvater"></div>
     </nav>
     <div class="cover" id="cover">
         <h2>Login</h2>
@@ -69,11 +70,11 @@
         </div>
         <div class="input-box">
             <label>密码</label>
-            <input type="text" id="password-reg" placeholder="请输入密码" />
+            <input type="password" id="password-reg" placeholder="请输入密码" />
         </div>
         <div class="input-box">
             <label>重复密码</label>
-            <input type="text" id="repassword-reg" placeholder="请再次输入密码" />
+            <input type="password" id="repassword-reg" placeholder="请再次输入密码" />
         </div>
         <div class="input-box">
             <label>验证码<span class="sendVer" onclick="sendVertificationCode(0)">发送验证码</span></label>
