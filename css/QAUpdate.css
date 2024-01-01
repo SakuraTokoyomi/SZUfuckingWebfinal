@@ -2,8 +2,9 @@
     position: relative;
     top: 100px;
     min-height: 1000px;
-    width: 70%;
+    width: 65%;
     margin: 0 auto;
+    background-color: rgba(128, 128, 128, 0.5);
     /* background-color: rgba(10, 15, 20, 0.2); */
 }
 
@@ -90,8 +91,8 @@ background-color: rgb(196, 196, 196);
 }
 
 .uploadBox {
-width: 200px;
-height: 140px;
+width: 280px;
+height: 200px;
 margin: 10px;
 display: flex;
 justify-content: center;
