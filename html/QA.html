@@ -25,7 +25,7 @@
         <a href="home.html">HOME</a>
         <a href="about.html">ABOUT</a>
         <a href="QA.html">Q&A</a>
-        <a href="album.html">SONGS</a>
+        <a href="songs.html">SONGS</a>
         <a href="login.html">LOGIN</a>
         <div class="navanim QA"></div>
         <div class="none"><img src="../image/login.png" class="login"></div>
@@ -138,6 +138,7 @@
     </footer> -->
     <script src="https://kit.fontawesome.com/f23451c27c.js" crossorigin="anonymous"></script>
     <script>
+        var count=0;
         function fuck() {
             alert("fuck you")
         }
@@ -151,57 +152,62 @@
         });
 
         document.addEventListener('DOMContentLoaded', function () {
-    // 替换这里的 URL 为您的数据源地址
-    var dataUrl = 'http://3zureus.vm.szu.moe:8080/webapi/QA/get-qas?From=0';
+            // 替换这里的 URL 为您的数据源地址
+            var dataUrl = 'http://3zureus.vm.szu.moe:8080/webapi/QA/get-qas?From=0';
+            
+            // 使用 fetch API 获取数据
+            fetch(dataUrl)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('网络响应错误');
+                    }
+                    return response.json();
+                })
+                .then(responseData => {
+                    if (responseData.Success) {
+                        var questionsContainer = document.querySelector('main');
+                        console.log(responseData);
+                        responseData.Data.List.forEach(function (question) {
+                            var date = new Date(question.CreatedAt * 1000); // 将秒转换为毫秒
+                            var formattedDate = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();
 
-    // 使用 fetch API 获取数据
-    fetch(dataUrl)
-    .then(response => {
-        if (!response.ok) {
-            throw new Error('网络响应错误');
-        }
-        return response.json();
-    })
-    .then(responseData => {
-        if (responseData.Success) {
-            var questionsContainer = document.querySelector('main'); 
-            console.log(responseData);
-            responseData.Data.List.forEach(function (question) {
-                var date = new Date(question.CreatedAt * 1000); // 将秒转换为毫秒
-                var formattedDate = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();
+                            var questionDiv = document.createElement('div');
+                            if(question.total<count)
+                            {
+                                questionDiv.id = 'new-question';
+                                count+=1;
+                            }
+                            questionDiv.className = 'question';
+                            questionDiv.innerHTML = '<h2>' + question.Title + '</h2>'
+                                + '<p>' + question.Content + '</p>';
 
-                var questionDiv = document.createElement('div');
-                questionDiv.className = 'question';
-                questionDiv.innerHTML = '<h2>' + question.Title + '</h2>'
-                                       + '<p>' + question.Content + '</p>';
+                            var likeParagraph = document.createElement('span');
+                            likeParagraph.className = 'question-info';
+                            likeParagraph.textContent = '浏览量: 0'; // 这里可以替换为动态数据
 
-                var likeParagraph = document.createElement('span');
-                likeParagraph.className = 'question-info';
-                likeParagraph.textContent = '浏览量: 0'; // 这里可以替换为动态数据
+                            var subscribeParagraph = document.createElement('span');
+                            subscribeParagraph.className = 'question-info';
+                            subscribeParagraph.textContent = '回复数: 0'; // 这里可以替换为动态数据    
 
-                var subscribeParagraph = document.createElement('span');
-                subscribeParagraph.className = 'question-info';
-                subscribeParagraph.textContent = '回复数: 0'; // 这里可以替换为动态数据
+                            var dateParagraph = document.createElement('span');
+                            dateParagraph.className = 'question-info';
+                            dateParagraph.textContent = '最后发表: ' + formattedDate;
 
-                var dateParagraph = document.createElement('span');
-                dateParagraph.className = 'question-info';
-                dateParagraph.textContent = '最后发表: ' + formattedDate;
+                            questionDiv.onclick = function () {
+                                window.location.href = question.DetailsPage;
+                            };
 
-                questionDiv.onclick = function () {
-                    window.location.href = question.DetailsPage;
-                };
-
-                questionDiv.appendChild(likeParagraph);
-                questionDiv.appendChild(subscribeParagraph);
-                questionDiv.appendChild(dateParagraph);
-                questionsContainer.appendChild(questionDiv);
-            });
-        }
-    })
-    .catch(error => {
-        console.error('获取数据失败:', error);
-    });
-});
+                            questionDiv.appendChild(likeParagraph);
+                            questionDiv.appendChild(subscribeParagraph);
+                            questionDiv.appendChild(dateParagraph);
+                            questionsContainer.appendChild(questionDiv);
+                        });
+                    }
+                })
+                .catch(error => {
+                    console.error('获取数据失败:', error);
+                });
+        });
 
     </script>
 </body>
