@@ -83,11 +83,11 @@ function saveName() {
 
 function saveSex() {
     var sex = $("userSex").value;
-    $("currentSex").innerHTML = "性别：" + sex;
     if(sex == ""){
         alert("请填写要修改的内容！");
         return;
     }
+    $("currentSex").innerHTML = "性别：" + sex;
     setCookie('usersex', sex, 7);
     $("userSex").value = "";
     alert("修改成功");
@@ -106,32 +106,20 @@ function saveSign() {
     alert("修改成功");
     return true;
 }
-
-function postData(url, data, callback) {
-    xhr.responseType = 'json';
-    xhr.open("POST", url, true);
-    xhr.setRequestHeader("Content-Type", "application/json");
-    xhr.onreadystatechange = function() {
-        if (xhr.readyState === 4) {
-            if (xhr.status === 200) {
-                // 如果状态码为 200 表示请求成功
-                let jsonResponse = xhr.response;
-                console.log(jsonResponse);
-            }
-            else if (xhr.status === 400){
-                alert(xhr.response);
-            }
-            else {
-                // 如果状态码不为 200，请求可能失败或者出现错误
-                console.error('Request failed with status:', xhr.status);
-                console.log(xhr.response);
-            }
-            // console.log("onreadystatechange 1st if triggered!");
-        }
-    }
-    xhr.send(JSON.stringify(data));
-}
   
+function logout(){
+    deleteCookie('userid');
+    deleteCookie('loginState');
+    deleteCookie('username');
+    deleteCookie('usersign');
+    deleteCookie('avaterExtention');
+    deleteCookie('password');
+    deleteCookie('account');
+    deleteCookie('usersex');
+    alert('登出完毕');
+    location.reload();
+  }
+
 document.addEventListener("DOMContentLoaded", loadUserInfo);
 function loadUserInfo() {
     var username = getCookie('username');
