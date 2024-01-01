@@ -33,7 +33,7 @@
     <div class="content">
         <div class="question-input-title">
             <input type="text" placeholder="请输入问题标题" id="questionEditorTitle">
-            <button id="submit" onclick="sendContent()">发布帖子</button>
+            <button id="submit" onclick="sendQuestionContent()">发布帖子</button>
         </div>
 
         <form method="post" action="../EditorUser">
@@ -47,7 +47,7 @@
 
         <div class="imgContainer">
             <div class = "uploadBox">
-                <svg class="uploadIcon" viewBox="0 0 1024 1024" width=100% height="60">
+                <svg class="uploadIcon" viewBox="0 0 1024 1024" width=100% height="100">
                     <path d="M1050.234 735.183H945.25V787.7h104.984v105.033h52.516V787.7h105.034v-52.517H1102.75V630.15h-52.516v105.033z m0-261.364a286.964 286.964 0 0 0-102.4 28.965c-0.195-119.125-0.195-227.28-0.195-227.035-44.959-96.549-121.612-11.46-136.046 6.631l-305.2 345.527-170.326-126.098a41.838 41.838 0 0 0-56.808 6.339L86.162 798.28a42.082 42.082 0 0 0 31.988 69.242c0.244 0 453.047-0.195 689.591-0.146 15.311 38.863 38.863 73.63 68.413 102.107H83.87c-46.128 0-83.87-37.937-83.87-83.87V80.408C0 34.182 37.742 0 83.87 0h879.08c46.08 0 87.284 34.182 87.284 80.165V473.77zM338.408 119.174a128.488 128.488 0 0 0-128.83 128.098 128.488 128.488 0 0 0 128.83 128.146A128.341 128.341 0 0 0 467.237 247.32a128.488 128.488 0 0 0-128.83-128.097z m738.157 878.543a236.3 236.3 0 1 1 0-472.649 236.3 236.3 0 0 1 0 472.65z" fill="#BFBFBF" p-id="6950"></path></svg>
                 <span class = "uploadText">点击上传</span>
                 <span class = "uploadText">或将文件拖拽至此处</span>
@@ -58,106 +58,7 @@
     <!--图片上传-->
 
 </main>
+<script src="../js/QAUpdate.js"></script>
 
-    <script>
-        var content = '# 在这里描述自己的问题';
-        var config = {
-            // 这里的尺寸必须在这里设置. 设置样式会被 editormd 自动覆盖掉.
-            width: "100%",
-            // 高度 100% 意思是和父元素一样高. 要在父元素的基础上去掉标题编辑区的高度
-            height: "100vh",
-            // 编辑器中的初始内容
-            markdown: content,
-            // 指定 editor.md 依赖的插件路径
-            path: "../node_modules/editor.md/lib/",
-            saveHTMLToTextarea : true
-        };
-        var testEditor = editormd("editor", config);
-    </script>
-
-    <script>
-        var ImgBoxs = document.getElementsByClassName("imgContainer");
-        var UploadInput = document.getElementsByClassName("uploadInput")[0];
-        var UploadBox = document.getElementsByClassName("uploadBox")[0];
-
-        // 使Box也拥有点击上传文件功能
-        UploadBox.addEventListener('click', function(e){
-            UploadInput.click();
-        });
-
-        // 拖拽物品导致颜色变化和离开的js
-        UploadBox.addEventListener('dragenter',function(e){
-            UploadBox.classList.add('drag');
-        });
-        UploadBox.addEventListener('dragover',function(e){
-            e.preventDefault();
-        });
-        UploadBox.addEventListener('dragleave',function(e){
-            UploadBox.classList.remove('drag');
-        });
-        UploadBox.addEventListener('drop',function(e){
-            e.preventDefault();
-            UploadBox.classList.remove('drag');
-            uploadPicture(e.dataTransfer.files);
-        });
-
-        UploadInput.addEventListener('change',function(e){
-            uploadPicture(e.target.files);
-        });
-
-        var countImg = 0;
-        var countBox = 1;
-        var MAX_FILE_SIZE = 3;
-
-        function uploadPicture(files){
-            for (let index = 0; index < files.length; index++) {
-                const file = files[index];
-                //过滤非图片
-                if( !/\.(png|jpg|jpeg|gif|PNG|JPG|JPEG|GIF)$/.test(file.name) ) {
-                    alert("仅支持PNG、jpg、jpeg、gif图片格式");
-                    break;
-                }
-                if(file.size > MAX_FILE_SIZE * 1024 * 1024 ){
-                    console.log(file.size,MAX_FILE_SIZE);
-                    alert("图片文件过大！请上传小于" + MAX_FILE_SIZE+ "MB的文件。");
-                    break;
-                }
-
-                var newImg = document.createElement('img');
-                newImg.src = window.URL.createObjectURL(file);
-                newImg.className = 'imgAdd';
-                newImg.id=countImg.toString();
-                newImg.addEventListener('dragstart',function(e){
-                    e.dataTransfer.setData("text/plain", this.id);
-                });
-                newImg.addEventListener('dragover', function (e) {
-                    e.preventDefault();
-                });
-                newImg.addEventListener('drop', function (e) {
-                    e.preventDefault();
-                    // var fromIndex = parseInt(e.dataTransfer.getData('text/plain'));
-                    var fromIndex = parseInt(e.dataTransfer.getData('text/plain'));
-                    var toIndex = parseInt(this.id);
-                    console.log(index);
-                    // 交换图片位置
-                    swapImages(fromIndex, toIndex);
-                });
-                countImg ++;
-                var ImgBox = ImgBoxs[0];
-                var lastImage = ImgBox.lastElementChild;
-                ImgBox.insertBefore(newImg, lastImage);
-            }
-        }
-
-        function swapImages(fromIndex, toIndex){
-            var images = document.getElementsByClassName('imgAdd');
-            console.log(images);
-            console.log(fromIndex,toIndex);
-            var tmp = images[fromIndex].src;
-            images[fromIndex].src = images[toIndex].src;
-            images[toIndex].src =  tmp;
-        }
-
-    </script>
 </body>
 </html>
