@@ -181,6 +181,7 @@ function updatePassword() {
 
 // 发送验证码
 function sendVertificationCode(btnnum) {
+  console.log(btnnum);
   // 禁用发送按钮防止重复点击
   var phoneNumber;
   var sendButton = $$('sendVer', btnnum);
@@ -195,12 +196,13 @@ function sendVertificationCode(btnnum) {
   const data = {
     Email: email
   };
+  console.log(email);
 
-  fetch('http://192.168.239.101:8080/user/check/request-check-email', {
-    method: 'POST',
+  fetch(`http://localhost:8080/user/check/request-check-email?Email=${email}`, {
+    method: 'GET',
     headers: {
       'accept': '*/*',
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json',
     },
     body: JSON.stringify(data)
   })
