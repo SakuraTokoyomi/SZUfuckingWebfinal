@@ -6,15 +6,10 @@ var count = 50;
 
 window.onload = function () {
   paper.setup('triangle-lost-in-space');
-  // D = Math.max(paper.view.getSize().width, paper.view.getSize().height);
-  // D = Math.max(paper.view.getSize().width, paper.view.getSize().height);
-
   mousePos = paper.view.center.add([view.bounds.width / 3, 100]);
   position = paper.view.center;
-
   // Draw the BG
   var background = new Path.Rectangle(view.bounds);
-  // background.fillColor = '#3B3251';
   buildStars();
   triangle = new Triangle(50);
   paper.view.draw();
@@ -31,10 +26,8 @@ window.onload = function () {
 // ---------------------------------------------------
 window.onresize = function () {
   project.clear();
-  // D = Math.max(paper.view.getSize().width, paper.view.getSize().height);
   // Draw the BG
   var background = new Path.Rectangle(view.bounds);
-  // background.fillColor = '#3B3251';
   buildStars();
   triangle.build(50);
 };
@@ -66,16 +59,6 @@ Triangle.prototype.build = function (a) {
     new paper.Point(a / 3, a * 0.4 / SQRT_3)
   ];
 
-  // this.flame = new Path({
-  //   segments: flameSegments,
-  //   closed: false,
-  //   fillColor: '#FCE589'
-  // });
-  // this.ship = new Path({
-  //   segments: segments,
-  //   closed: false,
-  //   fillColor: '#FF7885'
-  // });
   this.group = new Group({
     children: [],
     position: view.center
@@ -83,24 +66,12 @@ Triangle.prototype.build = function (a) {
 };
 
 Triangle.prototype.update = function () {
-  // this.flame.segments[0].point.x = random(this.flame.segments[1].point.x, this.flame.segments[2].point.x);
-
-  // var dist = mousePos.subtract(paper.view.center).length;
-  // var angle = mousePos.subtract(paper.view.center).angle;
-  // var spread = map(dist, 0, D / 2, 10, 30);
-
-  // this.flame.segments[0].point = paper.view.center.subtract(new Point({
-  //   length: map(dist, 0, D / 2, 2 * this.flameSize / 3, this.flameSize),
-  //   angle: random(angle - spread, angle + spread)
-  // }));
 };
 
 Triangle.prototype.rotate = function () {
-  // var angle = paper.view.center.subtract(mousePos).angle - paper.view.center.subtract(this.ship.segments[0].point)
-  //   .angle;
 
-  // this.group.rotate(angle, paper.view.center);
 };
+
 // ---------------------------------------------------
 //  Stars (from paperjs.org examples section)
 // ---------------------------------------------------

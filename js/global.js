@@ -50,15 +50,14 @@ function loadAvater() {
     avaterimageURL = 'http://3zureus.vm.szu.moe:8080/image/user/' + account + '_avaterImage.' + avaterExtention;
     console.log('current avater: ' + avaterimageURL);
   }
-  else avaterimageURL= '../image/login.png';
+  else avaterimageURL = '../image/login.png';
   $("navAvater").src = avaterimageURL;
   // userinfo page
   $('userAvater').src = avaterimageURL;
 }
 
-function search()
-{
-  var word= document.getElementById('search');
+function search() {
+  var word = document.getElementById('search');
   var searchTerm = encodeURIComponent(word.value); // 获取并编码输入框的值
   window.location.href = 'search.html?Keyword=' + searchTerm; // 跳转到 search.html 并附加搜索词
 }
@@ -69,23 +68,23 @@ function postData(url, data, callback) {
   xhr.open("POST", url, true);
   xhr.responseType = 'json';
   xhr.setRequestHeader("Content-Type", "application/json");
-  xhr.onreadystatechange = function() {
-      if (xhr.readyState === 4) {
-          if (xhr.status === 200) {
-              // 如果状态码为 200 表示请求成功
-              let jsonResponse = xhr.response;
-              console.log(jsonResponse);
-          }
-          else if (xhr.status === 400){
-              alert(xhr.response);
-          }
-          else {
-              // 如果状态码不为 200，请求可能失败或者出现错误
-              console.error('Request failed with status:', xhr.status);
-              console.log(xhr.response);
-          }
-          // console.log("onreadystatechange 1st if triggered!");
+  xhr.onreadystatechange = function () {
+    if (xhr.readyState === 4) {
+      if (xhr.status === 200) {
+        // 如果状态码为 200 表示请求成功
+        let jsonResponse = xhr.response;
+        console.log(jsonResponse);
       }
+      else if (xhr.status === 400) {
+        alert(xhr.response);
+      }
+      else {
+        // 如果状态码不为 200，请求可能失败或者出现错误
+        console.error('Request failed with status:', xhr.status);
+        console.log(xhr.response);
+      }
+      // console.log("onreadystatechange 1st if triggered!");
+    }
   }
   xhr.send(JSON.stringify(data));
 }
@@ -96,10 +95,10 @@ function stringToDecimal(str) {
   for (let i = 0; i < str.length; i++) {
     hexString += str.charCodeAt(i).toString(16);
   }
-  
+
   // 将十六进制串转换为十进制数字
   const decimalNumber = parseInt(hexString, 16) % 100;
-  
+
   return decimalNumber;
 }
 
@@ -107,7 +106,7 @@ function delay(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));
 }
 
-function logout(){
+function logout() {
   deleteCookie('userid');
   deleteCookie('loginState');
   deleteCookie('username');
