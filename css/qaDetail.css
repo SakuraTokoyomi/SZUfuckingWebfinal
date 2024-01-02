@@ -10,13 +10,11 @@
     /* 默认字体颜色 */
     --headerFont:#fff;
     /* 反差色 */
-    --fontColor:#00283A;
-    --mainColor:#ff8181;
-    --bagColor:#02162b;
+
 }
 
 body {
-    background-image: url(../image/detailbg.jpg);
+    background-image: url(../image/detailbg2.jpg);
     background-size: cover;
     background-repeat: no-repeat;
     background-attachment: fixed;
@@ -54,15 +52,6 @@ h1 {
     margin-bottom: 30px;
     display: flex;
     flex-direction: column;
-}
-.content-li svg path,.buttom svg path{
-    fill:#fff;
-}
-svg{
-    vertical-align: middle;
-}
-svg path{
-    fill: var(--headerFont);
 }
 
 .li2 .li2-box{
@@ -134,4 +123,8 @@ svg path{
     z-index: 1;
     left: 0;
     right: 0;
+  }
+
+  .moreIcon path{
+    fill:#02162b;
   }
