@@ -7,12 +7,9 @@ var UploadInput = document.getElementsByClassName("uploadInput")[0];
 var UploadBox = document.getElementsByClassName("uploadBox")[0];
 // 从这个页面请求中的POST数据获取问题的id，然后根据id获取问题的内容，然后填充到页面中
 var userID = getCookie('userid');
-
-
-
-//todo: 从cookie中获取token
-// var Token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJhdXRoMCIsInVzZXJuYW1lIjoidXNlcjEiLCJ1c2VySUQiOjEsImV4cCI6MTcwNDIxMDA3OX0.M7hEbHTKd3LwymR13X6BAge1OEbgooZfFagrbWkyvQ0";
+// 从cookie中获取token
 var Token = getCookie('Token');
+
 
 const updateQueryString = window.location.search;
 
@@ -27,13 +24,6 @@ var testEditor;
 let content;
 var config;
 
-
-function reload(){
-    // 检查localStorage questionTmp是否存在
-    if (localStorage.getItem('questionTmp') !== null) {
-        // 如果存在，将其填充到页面中
-    }
-}
 
 
 
