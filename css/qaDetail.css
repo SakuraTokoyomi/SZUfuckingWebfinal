@@ -1,16 +1,9 @@
 :root {
-    /* 默认背景色 */
     --backColor:#fff;
     --borderline:#00283a;
-    /* 卡片 */
     --headerCOlor:#00283A;
-    /* 卡片 */
     --headerhover:rgb(0, 40, 58,.8);
-
-    /* 默认字体颜色 */
     --headerFont:#fff;
-    /* 反差色 */
-
 }
 
 body {
@@ -144,7 +137,7 @@ h1 {
     cursor: pointer;
     transition: background-color 0.3s ease;
 }
-#back:hover {
+.underQ button:hover {
     background-color: #0056b3;
 }
 
