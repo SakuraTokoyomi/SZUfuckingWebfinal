@@ -76,6 +76,7 @@ function pageInit(){
                         window.location.href = `questionEditor.html?QAID=${QAID}`;
                     }
                     buttonDiv.append(updateButton);
+                    moreButtonHeight = "125px";
                 }
                 let answerButton = document.createElement("button");
                 answerButton.innerHTML = "回答";
@@ -160,9 +161,27 @@ function updateTime() {
         second: 'numeric'
     };
     const currentDateTime = now.toLocaleString(undefined, options);
-    document.getElementById('current-time').textContent = `${currentDateTime}`;
+    document.getElementById('current-time').textContent = `Current Time : ${currentDateTime}`;
 }
 
+
+var moreButtonHeight = "40px";
 pageInit();
 
-
+var isrightDivClick = false;
+function rightDivOnClick(){
+    console.log("rightDivOnClick triggered!")
+    var findNine = document.getElementsByClassName("findNine")[0];
+    if(isrightDivClick){
+        isrightDivClick = false;
+        findNine.style.height="0px";
+    }else{
+        isrightDivClick = true;
+        // findNine.style.display = "block";
+        // findNine.style.animation = "findNine 1s ease-in-out";
+        findNine.style.height=moreButtonHeight;
+    }
+}
+function back(){
+    window.history.back();
+}
