@@ -209,7 +209,6 @@ function hashPasswordSync(account, password) {
   var hash = CryptoJS.SHA256(saltedPassword);
   var hashedPassword = hash.toString(CryptoJS.enc.Hex);
   return hashedPassword;
-
 }
 
 function updatePassword() {
@@ -329,7 +328,7 @@ function sendVertificationCode(btnnum) {
   };
   // 将数据转换为 JSON 字符串并发送请求
   xhr.send();
-  startCountdown(1, btnnum); // 启动倒计时，60 秒
+  startCountdown(60, btnnum); // 启动倒计时，60 秒
 }
 
 function checkAccessCode(accessCode) {
