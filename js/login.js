@@ -42,6 +42,24 @@ function login() {
     return;
   }
 
+  var isexist = false;
+  // 获取 localStorage 中的所有键
+  const keys = Object.keys(localStorage);
+  // 遍历每个键，检查对应的值是否包含特定子串
+  keys.forEach(key => {
+    const value = localStorage.getItem(key);
+    if (value && value.includes(account.value)) {
+      console.log(`找到子串在键 "${key}" 的值中：${value}`);
+      // 在这里执行你想要的操作
+      isexist = true;
+    }
+  });
+  if(!isexist){
+    alert('账号不存在！');
+    return;
+  }
+
+
   // 验证密码
   if (password.value.length < 6) {
     alert("密码长度不能少于 6 个字符");
@@ -74,7 +92,7 @@ function login() {
   setCookie("loginState", true, 7);
   setCookie('account', account.value);
   setCookie('password', encrypted_password);
-  // window.location.href = "../html/usrinfo.html";
+  window.location.href = "../html/usrinfo.html";
 }
 
 // 冻结登录操作计数
@@ -95,7 +113,8 @@ function register() {
   var password = document.getElementById('password-reg').value;
   var confirmPassword = document.getElementById('repassword-reg').value;
   var accessCode = document.getElementById('accesscode').value;
-  var existAccount = getCookie('account');
+  // var existAccount = getCookie('account');
+
   // 纯数字唯一标识
   var userid = '2024' + stringToDecimal(account);
 
@@ -105,10 +124,21 @@ function register() {
     alert('请输入有效的邮箱作为账号');
     return false;
   }
-  if (existAccount === account) {
-    alert("账号已存在！");
-    return;
-  }
+
+  var isexist = false;
+  // 获取 localStorage 中的所有键
+  const keys = Object.keys(localStorage);
+  // 遍历每个键，检查对应的值是否包含特定子串
+  keys.forEach(key => {
+    const value = localStorage.getItem(key);
+    if (value && value.includes(account)) {
+      console.log(`找到子串在键 "${key}" 的值中：${value}`);
+      // 在这里执行你想要的操作
+      alert('账号已存在！');
+      isexist = true;
+    }
+  });
+  if(isexist)return;
 
   // 验证密码
   if (password.length < 6) {
@@ -136,13 +166,13 @@ function register() {
 
   var registerURL = "http://3zureus.vm.szu.moe:8080/user/register";
   var registerData = {
-    'Username' : account,
-    'Password' : encrypted_password,
-    'Email' : account
+    'Username': account,
+    'Password': encrypted_password,
+    'Email': account
   }
-  postData(registerURL, registerData, function(err, response) {
+  postData(registerURL, registerData, function (err, response) {
     if (err) {
-        console.error('Error:', xhr.status, xhr.statusText);
+      console.error('Error:', xhr.status, xhr.statusText);
     } else {
       console.log('成功响应：', response);
       // 处理响应数据
@@ -163,7 +193,7 @@ function register() {
   alert("提交成功！");
   alert("请继续完善个人信息！");
   setCookie("loginState", true, 7);
-  // window.location.href = "../html/usrinfo.html";
+  window.location.href = "../html/usrinfo.html";
 }
 
 // 密码加盐哈希加密
@@ -183,12 +213,31 @@ function updatePassword() {
   var password = document.getElementById('password-reset').value;
   var confirmPassword = document.getElementById('repassword-reset').value;
   var accessCode = document.getElementById('accesscode-reset').value;
+  var currentAccount = getCookie('account');
 
   var accountRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   if (!accountRegex.test(account)) {
     alert('请输入有效的邮箱作为账号');
     return false;
   }
+
+  var isexist = false;
+  // 获取 localStorage 中的所有键
+  const keys = Object.keys(localStorage);
+  // 遍历每个键，检查对应的值是否包含特定子串
+  keys.forEach(key => {
+    const value = localStorage.getItem(key);
+    if (value && value.includes(account)) {
+      console.log(`找到子串在键 "${key}" 的值中：${value}`);
+      // 在这里执行你想要的操作
+      isexist = true;
+    }
+  });
+  if(!isexist){
+    alert('账号不存在！');
+    return;
+  }
+
 
   // 验证密码
   if (password.length < 6) {
@@ -220,7 +269,8 @@ function updatePassword() {
   localStorage.setItem(account + '-password', encrypted_password);
 
   alert("密码修改成功！");
-  location.reload();
+  if(currentAccount === account) logout();
+  else location.reload();
 }
 
 // 发送验证码
@@ -353,6 +403,7 @@ function loadLoginInfo() {
     // var password = getCookie('password');
     $("account").value = account;
     $("password").value = "111111";
+    $('savepwd').checked = true;
   }
 }
 

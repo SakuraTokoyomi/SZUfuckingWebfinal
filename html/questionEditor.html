@@ -34,6 +34,8 @@
         <div class="question-input-title">
             <input type="text" placeholder="请输入问题标题" id="questionEditorTitle">
             <button id="submit" onclick="sendQuestionContent()">发布帖子</button>
+            &nbsp;
+            <button id="back" onclick="back()">&lt;返回</button>
         </div>
 
         <form method="post" action="../EditorUser">
@@ -54,10 +56,12 @@
                 <input type="file" class = "uploadInput" multiple accept="image/*">
             </div>
         </div>
+        <div><button id="clearImg" onclick="clearImg()">清空图片</button></div>
     </div>
     <!--图片上传-->
 
 </main>
+<script src="../js/http_cdnjs.cloudflare.com_ajax_libs_crypto-js_4.1.1_crypto-js.js"></script>
 <script src="../js/QAUpdate.js"></script>
 <script src="https://kit.fontawesome.com/f23451c27c.js" crossorigin="anonymous"></script>
 <script>
