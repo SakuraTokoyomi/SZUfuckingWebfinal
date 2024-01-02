@@ -105,7 +105,7 @@ function logout(){
   deleteCookie('loginState');
   deleteCookie('username');
   deleteCookie('usersign');
-  deleteCookie('avaterExtention');
+  // deleteCookie('avaterExtention');
   deleteCookie('password');
   deleteCookie('account');
   deleteCookie('usersex');

@@ -54,7 +54,7 @@ function login() {
       isexist = true;
     }
   });
-  if(!isexist){
+  if (!isexist) {
     alert('账号不存在！');
     return;
   }
@@ -86,6 +86,13 @@ function login() {
     loginErrCount++;
     return;
   }
+
+  // 更新到后端
+  var data = {
+    "Username": account.value,
+    "Password": truepwd
+  }
+  sendPostfun(data, `http://3zureus.vm.szu.moe:8080/user/login`, 0);
 
   savepwd();
   alert("登录成功！");
@@ -138,7 +145,7 @@ function register() {
       isexist = true;
     }
   });
-  if(isexist)return;
+  if (isexist) return;
 
   // 验证密码
   if (password.length < 6) {
@@ -170,14 +177,7 @@ function register() {
     'Password': encrypted_password,
     'Email': account
   }
-  postData(registerURL, registerData, function (err, response) {
-    if (err) {
-      console.error('Error:', xhr.status, xhr.statusText);
-    } else {
-      console.log('成功响应：', response);
-      // 处理响应数据
-    }
-  });
+  sendPostfun(registerData, registerURL, 1);
 
   // 验证码校验
   var accessCode = $('accesscode').value;
@@ -193,7 +193,7 @@ function register() {
   alert("提交成功！");
   alert("请继续完善个人信息！");
   setCookie("loginState", true, 7);
-  window.location.href = "../html/usrinfo.html";
+  // window.location.href = "../html/usrinfo.html";
 }
 
 // 密码加盐哈希加密
@@ -233,7 +233,7 @@ function updatePassword() {
       isexist = true;
     }
   });
-  if(!isexist){
+  if (!isexist) {
     alert('账号不存在！');
     return;
   }
@@ -263,13 +263,23 @@ function updatePassword() {
     alert("验证码错误！");
     return;
   }
-
+  b798ca38c3346b572cb2e927cd30ed4c7acbf0fe603066a0965756539fea310d
   var encrypted_password = hashPasswordSync(account, password);
+  var currentPwd = localStorage.getItem(account + '-password');
+  console.log('current-pwd', currentPwd);
+  // 更新到后端
+  var data = {
+    "username": account,
+    "oldpassword" : currentPwd,
+    "newpassword" : encrypted_password 
+  }
+  sendPostfun(data, `http://3zureus.vm.szu.moe:8080/user/changePassword`, 1);
+
   setCookie("password", encrypted_password, 7);
   localStorage.setItem(account + '-password', encrypted_password);
 
   alert("密码修改成功！");
-  if(currentAccount === account) logout();
+  if (currentAccount === account) logout();
   else location.reload();
 }
 
@@ -409,3 +419,37 @@ function loadLoginInfo() {
 
 //函数为传参而非调用
 document.addEventListener("DOMContentLoaded", loadLoginInfo);
+
+function sendPostfun(data, url, type) {
+  xhr.responseType = 'json';
+  xhr.open("POST", url, true);
+  xhr.setRequestHeader("Content-Type", "application/json");
+  if(type === 1){
+    var Token = localStorage.getItem('Token');
+    xhr.setRequestHeader("Token", Token);
+  }
+  xhr.onreadystatechange = function () {
+    if (xhr.readyState === 4) {
+      if (xhr.status === 200) {
+        // 如果状态码为 200 表示请求成功
+        let jsonResponse = xhr.response;
+        console.log(jsonResponse);
+        if (type === 0) {
+          console.log(jsonResponse.Token);
+          setCookie('Token', jsonResponse.Token, 7);
+          localStorage.setItem('Token', jsonResponse.Token);
+        }
+      }
+      else if (xhr.status === 400) {
+        console.log(xhr.response);
+      }
+      else {
+        // 如果状态码不为 200，请求可能失败或者出现错误
+        console.error('Request failed with status:', xhr.status);
+        console.log(xhr.response);
+      }
+      // console.log("onreadystatechange 1st if triggered!");
+    }
+  }
+  xhr.send(JSON.stringify(data));
+}
