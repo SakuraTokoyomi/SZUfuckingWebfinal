@@ -65,7 +65,7 @@ function login() {
 
   // 验证密码
   if (password.value.length < 6) {
-    alert("密码长度不能少于 6 个字符");
+    alert("密码长度不能少于 8 个字符");
     return;
   }
 
@@ -197,7 +197,7 @@ function register() {
   alert("提交成功！");
   alert("请继续完善个人信息！");
   setCookie("loginState", true, 7);
-  // window.location.href = "../html/usrinfo.html";
+  window.location.href = "../html/usrinfo.html";
 }
 
 // 密码加盐哈希加密
