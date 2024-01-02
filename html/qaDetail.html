@@ -66,8 +66,13 @@
                             <!--问题时间部分-->
                             <div class="question-footer">
                                 <div id="questionTime"></div>
-
-                                <div class="rightDiv">
+                                <!-- 弹出窗口 -->
+                                <div id="popup" class="popup" style="display: none;">
+                                    <button>按钮1</button>
+                                    <button>按钮2</button>
+                                    <button>按钮3</button>
+                                </div>
+                                <div class="rightDiv" onclick="openPopup()">
                                     <svg t="1704195227032" class="moreIcon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="4579" width="40" height="40"><path d="M895.362889 128.853858H135.997131c-41.735766 0-75.936241 22.935003-75.936242 71.33372 0 48.39671 34.200476 71.331714 75.936242 71.331714h759.365758c41.735766 0 75.936241-22.935003 75.936241-71.331714-0.103691-48.513111-34.199807-71.333721-75.936241-71.33372z m0 319.491875H135.997131c-41.735766 0-75.936241 22.935003-75.936242 71.33372s34.200476 71.333721 75.936242 71.333721h759.365758c41.735766 0 75.936241-22.935003 75.936241-71.333721-0.103691-48.51378-34.199807-71.333721-75.936241-71.33372z m0 311.626113H135.997131c-41.735766 0-75.936241 22.933665-75.936242 71.331713 0 48.392696 34.200476 71.333721 75.936242 71.333721h759.365758c41.735766 0 75.936241-22.941024 75.936241-71.333721-0.103691-48.519132-34.199807-71.331714-75.936241-71.331713z m0 0" p-id="4580"></path></svg>
                                 </div>
 
@@ -204,7 +209,6 @@ document.getElementById('search').addEventListener('keypress', function (event) 
 
     // Refresh time every second
     setInterval(updateTime, 1000);
-
 </script>
 <script src="https://kit.fontawesome.com/f23451c27c.js" crossorigin="anonymous"></script>
     <script src="../js/global.js"></script>
@@ -212,6 +216,20 @@ document.getElementById('search').addEventListener('keypress', function (event) 
     <script src="../js/detail_canvas.js"></script>
     <script>
         document.querySelector('.moreIcon path').setAttribute('fill', '#02162b');
+        var isButtonShow = false;
+        function openPopup() {
+            var popup = document.getElementById("popup");
+            if(isButtonShow){
+                // 隐藏弹出窗口
+                popup.style.display = "none";
+                isButtonShow = false;
+            }
+            else{
+                // 显示弹出窗口
+                popup.style.display = "block";
+                isButtonShow = true;
+            }
+        }
     </script>
 </body>
 </html>
