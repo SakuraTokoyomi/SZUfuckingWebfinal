@@ -68,6 +68,7 @@ function postAvater(img, imgExtention){
 }
 
 function saveName() {
+    var account = getCookie('account');
     var name = $("new-userName").value;
     if(name == ""){
         alert("请填写要修改的内容！");
@@ -75,6 +76,7 @@ function saveName() {
     }
     $("currentName").innerHTML = "当前称昵：" + name;
     setCookie('username', name, 7);
+    localStorage.setItem(account + '-username', name);
     $("new-userName").value = "";
     $('userName').innerHTML = name;
     alert("修改成功");
@@ -82,12 +84,14 @@ function saveName() {
 }
 
 function saveSex() {
+    var account = getCookie('account');
     var sex = $("userSex").value;
     if(sex == ""){
         alert("请填写要修改的内容！");
         return;
     }
     $("currentSex").innerHTML = "性别：" + sex;
+    localStorage.setItem(account + '-usersex', sex);
     setCookie('usersex', sex, 7);
     $("userSex").value = "";
     alert("修改成功");
@@ -95,36 +99,29 @@ function saveSex() {
 }
 
 function saveSign() {
+    var account = getCookie('account');
     var signtext = $("changedSign").value;
     if(signtext.trim() === ""){
         alert("请填写个性签名！");
         return;
     }
     $("currentSign").innerHTML = signtext;
+    localStorage.setItem(account + '-usersign', signtext);
     setCookie('usersign', signtext, 7);
     $("changedSign").value = "";
     alert("修改成功");
     return true;
 }
-  
-function logout(){
-    deleteCookie('userid');
-    deleteCookie('loginState');
-    deleteCookie('username');
-    deleteCookie('usersign');
-    deleteCookie('avaterExtention');
-    deleteCookie('password');
-    deleteCookie('account');
-    deleteCookie('usersex');
-    alert('登出完毕');
-    location.reload();
-  }
 
 document.addEventListener("DOMContentLoaded", loadUserInfo);
 function loadUserInfo() {
-    var username = getCookie('username');
-    var usersex = getCookie('usersex');
-    var usersign = getCookie('usersign');
+    // var username = getCookie('username');
+    // var usersex = getCookie('usersex');
+    // var usersign = getCookie('usersign');
+    var account = getCookie('account');
+    var username = localStorage.getItem(account + '-username');
+    var usersex = localStorage.getItem(account + '-usersex');
+    var usersign = localStorage.getItem(account + '-usersign');
 
     // 检查每个 Cookie 是否为空，如果为空则赋予初始值
     if (!username) {

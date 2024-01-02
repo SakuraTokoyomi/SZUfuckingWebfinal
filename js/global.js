@@ -44,14 +44,16 @@ function deleteCookie(cookieName) {
 function loadAvater() {
   var islogin = getCookie('loginState');
   var account = getCookie('account');
+  var avaterimageURL;
   var avaterExtention = getCookie('avaterExtention');
   if (islogin === "true") {
-    var avaterimageURL = 'http://3zureus.vm.szu.moe:8080/image/user/' + account + '_avaterImage.' + avaterExtention;
+    avaterimageURL = 'http://3zureus.vm.szu.moe:8080/image/user/' + account + '_avaterImage.' + avaterExtention;
     console.log('current avater: ' + avaterimageURL);
-    $("navAvater").src = avaterimageURL;
-    // userinfo page
-    $('userAvater').src = avaterimageURL;
   }
+  else avaterimageURL= '../image/login.png';
+  $("navAvater").src = avaterimageURL;
+  // userinfo page
+  $('userAvater').src = avaterimageURL;
 }
 document.addEventListener("DOMContentLoaded", loadAvater);
 
@@ -96,4 +98,18 @@ function stringToDecimal(str) {
 
 function delay(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+function logout(){
+  deleteCookie('userid');
+  deleteCookie('loginState');
+  deleteCookie('username');
+  deleteCookie('usersign');
+  deleteCookie('avaterExtention');
+  deleteCookie('password');
+  deleteCookie('account');
+  deleteCookie('usersex');
+  deleteCookie('isSavepwd');
+  // alert('登出完毕');
+  window.location.href = '../html/login.html';
 }
