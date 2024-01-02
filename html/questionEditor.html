@@ -5,6 +5,7 @@
     <title>舞萌DX-问题编辑</title>
     <link rel="stylesheet" href="../css/nav.css">
     <link rel="stylesheet" href="../css/QAUpdate.css">
+    <script src="../js/global.js"></script>
 </head>
 <body>
 <nav class="homenav">
@@ -15,7 +16,7 @@
                 <div class="search-box">
                     <input type="text" class="search-btn" id="search" placeholder="搜索">
                 </div>
-                <i class="fa-solid fa-magnifying-glass item" onclick="fuck()"></i>
+                <i class="fa-solid fa-magnifying-glass item" onclick="search()"></i>
             </div>
         </div>
     </div>
@@ -33,6 +34,8 @@
         <div class="question-input-title">
             <input type="text" placeholder="请输入问题标题" id="questionEditorTitle">
             <button id="submit" onclick="sendQuestionContent()">发布帖子</button>
+            &nbsp;
+            <button id="back" onclick="back()">&lt;返回</button>
         </div>
 
         <form method="post" action="../EditorUser">
@@ -53,12 +56,23 @@
                 <input type="file" class = "uploadInput" multiple accept="image/*">
             </div>
         </div>
+        <div><button id="clearImg" onclick="clearImg()">清空图片</button></div>
     </div>
     <!--图片上传-->
 
 </main>
+<script src="../js/http_cdnjs.cloudflare.com_ajax_libs_crypto-js_4.1.1_crypto-js.js"></script>
 <script src="../js/QAUpdate.js"></script>
-
+<script src="https://kit.fontawesome.com/f23451c27c.js" crossorigin="anonymous"></script>
+<script>
+document.getElementById('search').addEventListener('keypress', function (event) {
+    if (event.key === 'Enter') {
+        event.preventDefault(); // 阻止表单默认提交行为
+        var searchTerm = encodeURIComponent(this.value); // 获取并编码输入框的值
+        window.location.href = 'search.html?Keyword=' + searchTerm; // 跳转到 search.html 并附加搜索词
+    }
+});
+</script>
 </body>
 <script src="../js/global.js"></script>
 </html>

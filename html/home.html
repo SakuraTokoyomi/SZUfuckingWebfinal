@@ -22,7 +22,7 @@
                     <div class="search-box">
                         <input type="text" class="search-btn" id="search" placeholder="搜索">
                     </div>
-                    <i class="fa-solid fa-magnifying-glass item" onclick="fuck()"></i>
+                    <i class="fa-solid fa-magnifying-glass item" onclick="search()"></i>
                 </div>
             </div>
         </div>
@@ -97,17 +97,13 @@
     <script src="https://kit.fontawesome.com/f23451c27c.js" crossorigin="anonymous"></script>
     <script src="../js/sakura.js"></script>
     <script>
-        function fuck() {
-            alert("fuck you")
-        }
-        document.getElementById('search').addEventListener('keypress', function (event) {
-            if (event.key === 'Enter') {
-                event.preventDefault(); // 阻止表单默认提交行为
-                var searchTerm = this.value; // 获取输入框的值
-                alert(searchTerm)// 执行搜索操作，例如发送请求或更新页面
-                console.log("搜索词: " + searchTerm); // 示例操作
-            }
-        });
+document.getElementById('search').addEventListener('keypress', function (event) {
+    if (event.key === 'Enter') {
+        event.preventDefault(); // 阻止表单默认提交行为
+        var searchTerm = encodeURIComponent(this.value); // 获取并编码输入框的值
+        window.location.href = 'search.html?Keyword=' + searchTerm; // 跳转到 search.html 并附加搜索词
+    }
+});
 
     </script>
 </body>
