@@ -6,9 +6,13 @@ var ImgBoxs = document.getElementsByClassName("imgContainer");
 var UploadInput = document.getElementsByClassName("uploadInput")[0];
 var UploadBox = document.getElementsByClassName("uploadBox")[0];
 // 从这个页面请求中的POST数据获取问题的id，然后根据id获取问题的内容，然后填充到页面中
-var userID;
+var userID = getCookie('userid');
+
+
+
 //todo: 从cookie中获取token
-var Token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJhdXRoMCIsInVzZXJuYW1lIjoidXNlcjEiLCJ1c2VySUQiOjEsImV4cCI6MTcwNDIxMDA3OX0.M7hEbHTKd3LwymR13X6BAge1OEbgooZfFagrbWkyvQ0";
+// var Token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJhdXRoMCIsInVzZXJuYW1lIjoidXNlcjEiLCJ1c2VySUQiOjEsImV4cCI6MTcwNDIxMDA3OX0.M7hEbHTKd3LwymR13X6BAge1OEbgooZfFagrbWkyvQ0";
+var Token = getCookie('Token');
 
 const updateQueryString = window.location.search;
 
@@ -51,7 +55,6 @@ if(isQuestionUpdate) {
                 console.log(jsonResponse);
                 let questionTitle = jsonResponse.Data.Title;
                 content = '' + jsonResponse.Data.Content;
-                userID = jsonResponse.Data.AuthorId;
                 // 设置页面标题，id=questionEditorTitle
                 document.getElementById('questionEditorTitle').value = questionTitle;
                 // 设置底部图片
@@ -141,7 +144,6 @@ if(isQuestionUpdate) {
         saveHTMLToTextarea: true
     };
     testEditor = editormd("editor", config);
-    userID = 1;
 }
 
 
@@ -250,6 +252,7 @@ function calculateBase64FromSrc(src) {
 
 
 function postAvater(img, imgExtention) {
+    console.log("开始上传图片");
     var imageBedurl = 'http://3zureus.vm.szu.moe:8080/image/user/upload'
     var dataToSend = {
         'base64Image': img,
@@ -271,6 +274,7 @@ function postAvater(img, imgExtention) {
 // 对每张图片进行MD5计算并拼接URL
 
 async function sendQuestionContent() {
+
     var title = document.getElementById('questionEditorTitle').value;
     var content = testEditor.getMarkdown();
     var images = document.getElementsByClassName('imgAdd');
@@ -332,11 +336,12 @@ async function sendQuestionContent() {
     xhr.onreadystatechange = function () {
         if (xhr.readyState === 4) {
             if (xhr.status === 200) {
+                localStorage.removeItem('questionTmp');
                 // 如果状态码为 200 表示请求成功
                 let jsonResponse = xhr.response;
                 console.log(jsonResponse);
                 alert("Success！");
-                // window.location.href = "../html/QADetail.html?QAID=" + QAID;
+                window.location.href = "../html/QA.html";
             } else if (xhr.status === 400) {
                 console.log(xhr.response);
                 alert("Fail！");
