@@ -20,14 +20,14 @@ function pageInit(){
 
                 var markdown = jsonResponse.Data.Content;
                 testEditormdView = editormd.markdownToHTML("questionContent", {
-                    markdown: markdown,//+ "\r\n" + $("#append-test").text(),
-                    htmlDecode: "style,script,iframe",  // you can filter tags decode
-                    tocm: true,    // Using [TOCM]
+                    markdown: markdown,
+                    htmlDecode: "style,script,iframe",
+                    tocm: true,
                     emoji: true,
                     taskList: true,
-                    tex: true,  // 默认不解析
-                    flowChart: true,  // 默认不解析
-                    sequenceDiagram: true,  // 默认不解析
+                    tex: true,
+                    flowChart: true,
+                    sequenceDiagram: true,
                 });
                 // 设置问题图片
                 let questionImages = jsonResponse.Data.ImgUrls;
@@ -146,7 +146,6 @@ function pageInit(){
 
 
     updateTime();
-// Refresh time every second
     setInterval(updateTime, 1000);
 }
 

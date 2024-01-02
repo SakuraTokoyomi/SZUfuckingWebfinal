@@ -5,6 +5,7 @@ var triangle, D, mousePos, position;
 var count = 50;
 
 window.onload = function () {
+  // get canvas
   paper.setup('triangle-lost-in-space');
   mousePos = paper.view.center.add([view.bounds.width / 3, 100]);
   position = paper.view.center;
@@ -39,9 +40,7 @@ var random = function (minimum, maximum) {
 var map = function (n, start1, stop1, start2, stop2) {
   return (n - start1) / (stop1 - start1) * (stop2 - start2) + start2;
 };
-// ---------------------------------------------------
-//  Triangle
-// ---------------------------------------------------
+
 var Triangle = function (a) {
   this.build(a);
 };
@@ -137,8 +136,6 @@ var keepInView = function (item) {
 };
 
 var moveStars = function (vector) {
-  // Run through the active layer's children list and change
-  // the position of the placed symbols:
   var layer = project.activeLayer;
   for (var i = 1; i < count + 1; i++) {
     var item = layer.children[i];
