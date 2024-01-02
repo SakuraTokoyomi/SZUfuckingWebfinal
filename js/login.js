@@ -52,6 +52,9 @@ function login() {
       console.log(`找到子串在键 "${key}" 的值中：${value}`);
       // 在这里执行你想要的操作
       isexist = true;
+      var thisUserid = key.substring(key.indexOf('-') + 1);
+      console.log("thisuserid: " + thisUserid);
+      setCookie("userid", thisUserid, 7);
     }
   });
   if (!isexist) {
