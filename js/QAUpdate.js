@@ -281,7 +281,7 @@ async function sendQuestionContent() {
 
     // new array to store imgUrls, size = images.length
     let imgUrls = [];
-
+    let uploadPromises = [];
     for (const image of images) {
         if (image.src === "") {
             continue;
@@ -298,10 +298,15 @@ async function sendQuestionContent() {
             var imgName = md5 + '.png';
             image.src = serverHost + '/image/user/' + imgName;
             imgUrls.push('/image/user/' + imgName);
-            postAvater(base64Value, imgName);
+            uploadPromises.push(postAvater(base64Value, imgName));
         } catch (error) {
             console.error(error);
         }
+    }
+    try {
+        await Promise.all(uploadPromises);
+    } catch (error) {
+        console.error("Error uploading images:", error);
     }
 
     console.log(imgUrls); // 在这里检查是否正确获取了 imgUrls
