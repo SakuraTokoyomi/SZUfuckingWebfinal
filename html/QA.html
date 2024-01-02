@@ -149,7 +149,7 @@
     <script>
         function handleAddButtonClick() {
             var loginState = getCookie('loginState');
-            if (loginState === '1') {
+            if (loginState === 'true') {
                 window.location.href = 'questionEditor.html';
             } else {
                 alert('请先登录');

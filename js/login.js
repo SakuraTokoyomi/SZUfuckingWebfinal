@@ -147,9 +147,10 @@ function register() {
   });
   if (isexist) return;
 
+  var passwordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/;
   // 验证密码
-  if (password.length < 6) {
-    alert('密码长度不能少于 6 个字符');
+  if (!passwordPattern.test(password)) {
+    alert('*密码安全性不足*，需要满足以下条件：\n1.至少要包含一个小写字母和一个大写字母\n2.至少要包含一个数字\n3.密码长度不能小于8位.');
     return false;
   }
 
@@ -238,10 +239,10 @@ function updatePassword() {
     return;
   }
 
-
+  var passwordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/;
   // 验证密码
-  if (password.length < 6) {
-    alert('密码长度不能少于 6 个字符');
+  if (!passwordPattern.test(password)) {
+    alert('*密码安全性不足*，需要满足以下条件：\n1.至少要包含一个小写字母和一个大写字母\n2.至少要包含一个数字\n3.密码长度不能小于8位.');
     return false;
   }
 
@@ -263,7 +264,7 @@ function updatePassword() {
     alert("验证码错误！");
     return;
   }
-  b798ca38c3346b572cb2e927cd30ed4c7acbf0fe603066a0965756539fea310d
+  
   var encrypted_password = hashPasswordSync(account, password);
   var currentPwd = localStorage.getItem(account + '-password');
   console.log('current-pwd', currentPwd);
