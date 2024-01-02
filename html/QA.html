@@ -33,7 +33,7 @@
     <div class="search-container">
         <input type="text" placeholder="搜索问题..." id="qa-search-box">
         <button type="submit" id="search-button" onclick="search()">在Q&A中搜索</button>
-        <button type="button" id="add-button" ><a href="questionEditor.html" style="text-decoration: none;">+</a></button>
+        <button type="button" id="add-button">+</button>
     </div>
     <div id="message-box" style="display: none;">有新问题！</div>
     <main>
@@ -42,7 +42,7 @@
     <script>
         // 保存当前问题列表到 localStorage
         function saveQuestions(questions) {
-            localStorage.setItem('savedQuestions', JSON.stringify(questions.map(q => q.QAID)));
+            localStorage.setItem('savedQuestions', JSON.stringify(questions.map(q => q.Qaid)));
         }
 
         // 加载保存的问题列表
@@ -52,7 +52,7 @@
         }
 
         function isNewQuestion(question, savedQuestions) {
-            return !savedQuestions.includes(question.QAID);
+            return !savedQuestions.includes(question.Qaid);
         }
 
         function showMessage() {
@@ -102,8 +102,11 @@
                             dateParagraph.textContent = '最后发表: ' + formattedDate;
 
                             questionDiv.onclick = function () {
-                                window.location.href = question.DetailsPage;
+                                var detail = question.DetailPage;
+                                 detail = detail.substring(1);
+                                window.location.href = detail;
                             };
+
 
                             questionDiv.appendChild(likeParagraph);
                             questionDiv.appendChild(subscribeParagraph);
@@ -142,6 +145,18 @@
             }
         });
 
+    </script>
+    <script>
+        function handleAddButtonClick() {
+            var loginState = getCookie('loginState');
+            if (loginState === '1') {
+                window.location.href = 'questionEditor.html';
+            } else {
+                alert('请先登录');
+                window.location.href = 'login.html';
+            }
+        }
+        document.getElementById('add-button').addEventListener('click', handleAddButtonClick);
     </script>
 </body>
 
